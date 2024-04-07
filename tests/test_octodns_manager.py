@@ -81,13 +81,11 @@ class TestManager(TestCase):
 
     def test_missing_zone(self):
         with self.assertRaises(ManagerException) as ctx:
-            Manager(get_config_filename('dynamic-config.yaml')).sync(
-                ['missing.zones.']
-            )
-        self.assertTrue('Requested zone:' in str(ctx.exception))
-
-    def test_missing_targets(self):
-        with self.assertRaises(ManagerException) as ctx:
+            with self.assertRaises(ManagerException) as ctx:
+                Manager(get_config_filename('dynamic-config.yaml')).sync(
+                    ['missing.zones.']
+                )
+                self.assertTrue('Requested zone:' in str(ctx.exception))
             Manager(get_config_filename('provider-problems.yaml')).sync(
                 ['missing.targets.']
             )
