@@ -194,11 +194,13 @@ class TestNetworkValueFilter(TestCase):
     ]:
         zone.add_record(record)
 
+```python
     def test_bad_config(self):
         with self.assertRaises(ValueError):
-            filter_private = NetworkValueRejectlistFilter(
+            NetworkValueRejectlistFilter(
                 'rejectlist', set(('string', '42.42.42.42/43'))
             )
+```
 
     def test_reject(self):
         filter_private = NetworkValueRejectlistFilter(
