@@ -199,7 +199,6 @@ class TestNetworkValueFilter(TestCase):
             filter_private = NetworkValueRejectlistFilter(
                 'rejectlist', set(('string', '42.42.42.42/43'))
             )
-
     def test_reject(self):
         filter_private = NetworkValueRejectlistFilter(
             'rejectlist', set(('10.0.0.0/8', 'fd00::/8'))
