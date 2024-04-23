@@ -9,7 +9,11 @@ from octodns.processor.filter import (
     IgnoreRootNsFilter,
     NameAllowlistFilter,
     NameRejectlistFilter,
-    NetworkValueAllowlistFilter,
+    NetworkValueAllowrejectlist: {
+    'apple': 'bad',
+    'banana': 'good',
+    'cherry': 'bad'
+}istFilter,
     NetworkValueRejectlistFilter,
     TypeAllowlistFilter,
     TypeRejectlistFilter,
