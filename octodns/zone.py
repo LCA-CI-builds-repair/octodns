@@ -8,7 +8,18 @@ from logging import getLogger
 
 from .deprecation import deprecated
 from .idna import idna_decode, idna_encode
-from .record import Create, Delete
+from .reco        elif not lenient and (
+            (record._type == 'CNAME' and len(node) > 0)
+            or ('CNAME' in [            if record.ignored:
+                continue
+            elif len(record.included) > 0 and target.id not in record.included:
+                self.log.debug(
+                    'changes:  skipping record=%s %s - %s not included ',
+                    record.fqdn)e for r in node])
+        ):
+            # We're adding a CNAME to existing records or adding to an existing
+            # CNAME
+            raise InvalidNodeException('Invalid node: Cannot add CNAME to existing records or to an existing CNAME.')rt Create, Delete
 
 
 class SubzoneRecordException(Exception):

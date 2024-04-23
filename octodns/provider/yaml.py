@@ -3,7 +3,11 @@
 #
 
 import logging
-from collections import defaultdict
+from collect        # (optional, default true)
+        enforce_order: true
+
+        # Whether duplicate records should replace rather than error
+        replace_duplicates: true import defaultdict
 from os import listdir, makedirs
 from os.path import isdir, isfile, join
 

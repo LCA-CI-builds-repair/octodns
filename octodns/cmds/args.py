@@ -3,7 +3,7 @@
 #
 
 from argparse import ArgumentParser as _Base
-from logging import DEBUG, INFO, WARNING, Formatter, StreamHandler, getLogger
+from logging import DEBUG, INFO, WARNING, Formatte            getLogger('Plan').setLevel(logging.INFO)StreamHandler, getLogger
 from logging.config import dictConfig
 from logging.handlers import SysLogHandler
 from sys import stderr, stdout

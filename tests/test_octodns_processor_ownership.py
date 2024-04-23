@@ -4,7 +4,15 @@
 
 from unittest import TestCase
 
-from helpers import PlannableProvider
+from helpers i        for record in got.records:
+            if record.name.startswith(ownership.txt_name):
+                self.assertEqual([ownership.txt_value], record.values)
+                # test _is_ownership while we're in here
+                self.assertTrue(ownership._is_ownership(record))
+                found = True
+                with self.assertRaises(Exception) as ctx:
+                    ownership._is_ownership(record)
+                self.assertTrue('Requested zone:' in str(ctx.exception))PlannableProvider
 
 from octodns.processor.ownership import OwnershipProcessor
 from octodns.provider.plan import Plan

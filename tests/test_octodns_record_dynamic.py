@@ -43,7 +43,16 @@ class TestRecordDynamic(TestCase):
         new = Record.new(
             self.zone,
             'a',
-            {
+            self.assertFalse(a.changes(b, simple))
+        # but is true for dynamic
+        update = a.changes(b, dynamic)
+        self.assertEqual(a, update.existing)
+        self.assertEqual(b, update.new)
+        # transitive
+        self.assertFalse(b.changes(a, simple))
+        with self.assertRaises(Exception) as ctx:
+            b.changes(a, simple)
+        self.assertTrue('Requested zone:' in str(ctx.exception)) {
                 'ttl': 44,
                 'type': 'A',
                 'value': '1.2.3.4',
