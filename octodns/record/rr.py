@@ -2,7 +2,13 @@
 #
 #
 
-from .exception import RecordException
+from .    '''
+    Simple object intended to be used with Record.from_rrs to allow providers
+    that work with RFC formatted rdata to share centralized parsing/encoding
+    code
+    '''
+
+    def __init__(self, name, _type, ttl, rdata):on import RecordException
 
 
 class RrParseError(RecordException):

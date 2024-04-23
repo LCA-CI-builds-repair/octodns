@@ -1,8 +1,20 @@
-## v1.3.0 - 2023-??-?? - ???
+## v1.3.0 * Update scr* Address a bug in the handling of loading auto-arpa manager configuration.
+
+## v1.1.0 - 2023-09-13 - More than enough for a minor release
+
+#### Noteworthy changes
+
+* New dynamic zone config support that allows wildcard entries in the octoDNSase to do clean room dist builds
+
+## v1.2.0 - 2023-09-28 - Bunch more bug fixes
+
+* Record.from_rrs supports `source` parameter-??-?? - ???
 
 * Added ZoneNameFilter processor to enable ignoring/alerting on type-os like
   octodns.com.octodns.com
-* Fixed issues with handling of chunking large TXT values for providers that use
+* Fixed issues with handling of chunking large TXT values for pro* Skip Alias recordsets for Route53 (unsupported concept/type)
+* Make sure that Record geo values are sorted to prevent false diffs that can never be fixed
+* `DynProvider` fix to safely roll rulesets, things could end up on rules without a pool and/or hitting the default rule previously.s that use
   the in-built `rrs` method
 * ExcludeRootNsChanges processor that will error (or warn) if plan includes a
   change to root NS records

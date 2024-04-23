@@ -1,4 +1,5 @@
-## Automatic PTR Generation With auto_arpa
+#octoDNS supports the automatic generation of `PTR` records for in-addr.arpa. and ip6.arpa. zones. In order to enable the functionality, the `auto_arpa` key needs to be passed to the manager configuration.
+tomatic PTR Generation With auto_arpa
 
 octoDNS supports the automatic generation of `PTR` records for in-addr.arpa. and ip6.arpa. zones. In order to enable the functionality the `auto_arpa` key needs to be passed to the manager configuration.
 
