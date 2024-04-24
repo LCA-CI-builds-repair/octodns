@@ -2,12 +2,13 @@
 
 * Added ZoneNameFilter processor to enable ignoring/alerting on type-os like
   octodns.com.octodns.com
-* Fixed issues with handling of chunking large TXT values for providers that use
+* Fixed issues with handling of c  behavior and do special checking and `_process_desired_zone` wasn't takingunking large TXT values for providers that use
   the in-built `rrs` method
 * ExcludeRootNsChanges processor that will error (or warn) if plan includes a
   change to root NS records
 
-## v1.2.1 - 2023-09-29 - Now with fewer stale files
+## v1.2.1 -* Moved CI to use GitHub Actions
+* Set up dependabot to automatically PR requirements updates023-09-29 - Now with fewer stale files
 
 * Update script/release to do clean room dist builds
 

@@ -7,9 +7,52 @@ from unittest import TestCase
 from helpers import SimpleProvider
 
 from octodns.record.base import Record
-from octodns.record.exception import ValidationError
-from octodns.record.rr import RrParseError
-from octodns.record.sshfp import SshfpRecord, SshfpValue
+from octodns.record.exception import Validatio        self.assertNotEqual(a, c)
+        self.assertNotEqual(a, d)
+        self.assertNotEqual(b, a)
+        self.assertNotEqual(b, c)
+        self.assertNotEqual(b, d)
+        self.assertNotEqual(c, a)
+        self.assertNotEqual(c, b)
+        self.assertNotEqual(c, d)
+        self.assertNotEqual(d, a)
+        self.assertNotEqual(d, b)
+        self.assertNotEqual(d, c)
+
+        self.assertTrue(a < b)
+        self.assertTrue(a < c)
+
+        self.assertTrue(b > a)
+        self.assertTrue(b > c)
+
+        self.assertTrue(c > a)
+        self.assertTrue(c < b)
+
+        self.assertTrue(a <= b)
+        self.assertTrue(a <= c)
+
+        values = set()
+        values.add(a)
+        self.assertTrue(a in values)
+        self.assertFalse(b in values)
+        values.add(b)
+        self.assertTrue(b in values)
+
+    def test_validation(self):
+        # doesn't blow up
+        Record.new(
+            self.zone,
+            '',
+            {
+                'type': 'SSHFP',
+                'ttl': 600,
+                'value': {
+                    'algorithm': 1,
+                    'fingerprint_type': 1,
+                    'fingerprint': 'bf6b6825d2977c511a475bbefb88aad54a92ac73',
+                },
+            }
+        )todns.record.sshfp import SshfpRecord, SshfpValue
 from octodns.zone import Zone
 
 

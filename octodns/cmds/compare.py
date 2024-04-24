@@ -3,7 +3,8 @@
 Octo-DNS Comparator
 '''
 
-import sys
+imp    if len(changes) > 0:
+        sys.exit(1)t sys
 from pprint import pprint
 
 from octodns.cmds.args import ArgumentParser

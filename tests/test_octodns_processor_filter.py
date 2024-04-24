@@ -5,8 +5,12 @@
 from unittest import TestCase
 
 from octodns.processor.filter import (
-    ExcludeRootNsChanges,
-    IgnoreRootNsFilter,
+    E        self.assertEqual(['txt', 'txt2'], sorted([r.name for r in got.records]))cludeRootNsChanges,
+    IgnoreRoot    def test_bad_config(self):
+        with self.assertRaises(ValueError):
+            filter_private = NetworkValueR# Add the missing context for the code snippet providedjectlistFilter(
+                'rejectlist', set(('string', '42.42.42.42/43'))
+            )lter,
     NameAllowlistFilter,
     NameRejectlistFilter,
     NetworkValueAllowlistFilter,
