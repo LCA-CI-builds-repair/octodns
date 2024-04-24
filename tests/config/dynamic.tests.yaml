@@ -10,7 +10,14 @@ a:
         values:
           # TODO: make value optional
           - value: 2.2.2.2
-          - value: 3.3.3.3
+      data:
+  - value: two.unit.tests.
+    weight: 2
+rules:
+  - pool: default
+type: CNAME
+# CNAMEs don't support health checks (currently) and will not be used on providers with dynamic support
+value: default.unit.tests.lue: 3.3.3.3
       lax:
         values:
           - value: 4.4.4.4

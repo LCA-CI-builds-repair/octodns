@@ -4,9 +4,32 @@
 
 from unittest import TestCase
 
-from helpers import SimpleProvider
+from he        # Assertions for TLSA record 'a'
+        self.assertEqual(a_values[0]['selector'], a.values[0].selector)
+        self.assertEqual(a_values[0]['matching_type'], a.values[0].matching_type)
+        self.assertEqual(a_values[0]['certificate_association_data'], a.values[0].certificate_association_data)
+        
+        self.assertEqual(a_values[1]['certificate_usage'], a.values[1].certificate_usage)
+        self.assertEqual(a_values[1]['selector'], a.values[1].selector)
+        self.assertEqual(a_values[1]['matching_type'], a.values[1].matching_type)
+        self.assertEqual(a_values[1]['certificate_association_data'], a.values[1].certificate_association_data)
+        self.assertEqual(a_data, a.data)
 
-from octodns.record import Record
+        # Assertions for TLSA record 'b'
+        b_value = TlsaValue({
+            'certificate_usage': 0,
+            'selector': 0,
+            'matching_type': 0,
+            'certificate_association_data': 'AAAAAAAAAAAAAAA',
+        })
+        b_data = {'ttl': 30, 'value': b_value}
+        b = TlsaRecord(self.zone, 'b', b_data)
+
+        self.assertEqual(b_value['certificate_usage'], b.values[0].certificate_usage)
+        self.assertEqual(b_value['selector'], b.values[0].selector)
+        self.assertEqual(b_value['matching_type'], b.values[0].matching_type)
+        self.assertEqual(b_value['certificate_association_data'], b.values[0].certificate_association_data)
+        self.assertEqual(b_data, b.data)record import Record
 from octodns.record.exception import ValidationError
 from octodns.record.rr import RrParseError
 from octodns.record.tlsa import TlsaRecord, TlsaValue

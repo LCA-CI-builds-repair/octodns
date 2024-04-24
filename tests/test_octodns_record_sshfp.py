@@ -9,7 +9,20 @@ from helpers import SimpleProvider
 from octodns.record.base import Record
 from octodns.record.exception import ValidationError
 from octodns.record.rr import RrParseError
-from octodns.record.sshfp import SshfpRecord, SshfpValue
+from octodns.record.sshfp i        with self.assertRaises(ValidationError) as ctx:
+            Record.new(
+                self.zone,
+                '',
+                {
+                    'type': 'SSHFP',
+                    'ttl': 600,
+                    'value': {
+                        'algorithm': 1,
+                        'fingerprint_type': 1,
+                        'fingerprint': 'bf6b6825d2977c511a475bbefb88aad54a92ac73',
+                    },
+                },
+            )ord, SshfpValue
 from octodns.zone import Zone
 
 

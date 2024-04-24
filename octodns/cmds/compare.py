@@ -1,9 +1,17 @@
 #!/usr/bin/env python
 '''
-Octo-DNS Comparator
-'''
+Octo-DNS Comparato    changes = manager.compare(args.a, args.b, args.zone)
 
-import sys
+    # Filter changes list based on ignore-prefix argument if present
+    if args.ignore_prefix:
+        pattern = args.ignore_prefix
+        changes = [c for c in changes if not c.record.fqdn.startswith(pattern)]
+
+    pprint(changes)
+
+    # Exit with non-zero exit code if changes exist after filtering
+    if changes:
+        sys.exit(1) sys
 from pprint import pprint
 
 from octodns.cmds.args import ArgumentParser

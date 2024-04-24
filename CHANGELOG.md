@@ -1,4 +1,61 @@
-## v1.3.0 - 2023-??-?? - ???
+#* Added ZoneNameFilter processor to enable ignoring/alerting on typos like octodns.com.octodns.com
+* Fixed issues with handling of chunking large TXT values for providers that use the in-built `rrs` method
+* ExcludeRootNsChanges processor that will error (or warn) if the plan includes a change to root NS records
+
+## v1.2.1 - * Fully remove Python 2.7 sup* Lots of progress on the partial/beta support for dynamic r* Added support for dynamic records to Ns1Provider, updated cl* Route53Provider dynamic record support
+* DynProvider dynamic record support
+* SUPPORTS_DYNAMIC is an optional property that defaults to False
+* Route53Provider health checks support disabling latency measurement
+* CloudflareProvider fix for SRV record unpacking
+* DNSMadeEasy provider uses 'supports' to avoid issues with unknown record types
+* Updates to AzureProvider library versions
+* Normalize MX/CNAME/ALIAS/PTR value to lowercase
+* SplitYamlProvider support added
+* DynProvider fix for Traffic Directors association to records, explicitly defined
+* TinyDNS support for TXT and AAAA records and fixes for escaping semicolons
+* Pre-commit hook now requires 100% code coverageimiting implementation
+* Moved CI to use GitHub Actions
+* Set up Dependabot to automatically PR requirements updates
+* Attempt at bumping all of the requirements and Dependabot them going forward
+* Enhanced `dynamic` pool validation rules
+* Delegation set support for Route53 and fix for CNAME/A ordering issues
+* DNSimple sandbox support
+* OVHProvider support for CAA
+* Akamai renamed FastDNS to EdgeDNS
+* Transip bumped to 2.1.2 which should move away from its SOAP API that is EOL'd
+
+## v0.9.9 - 2019-11-04 - Python 3.7 Supporte, still not production-ready
+* NS1 fix for when a pool only exists as a fallback
+* Zone-level lenient flag
+* Validate weight makes sense for pools with a single record
+* UltraDNS support for aliases and general fixes/improvements
+* Miscellaneous documentation fixes and improvementsims
+* Dynamic record pool status flag: up/down/obey added with provider support as possible
+* Support for multi-value PTRs where providers allow them
+* Normalize IPv6 addresses to avoid false changes and simplify providers
+* Include pure-python wheel distributions in release builds
+* Improvements and updates to AzureProvider, especially with respect to dynamic records
+* NS1Provider support for IPv6 monitors and general caching/performance improvements
+* Route53Provider.get_zones_by_name option to avoid paging through huge lists and hitting rate limits
+* Miscellaneous Route53Provider improvements
+* Ensure no network access during testing (helps with runtime)
+* Speed up the long pole unit tests
+* Miscellaneous ConstellixProvider, DigitalOceanProvider, GCoreProvider, and Route53Provider fixes & improvementsth fewer stale files
+
+* Update script/release to perform clean room dist builds
+
+## v1.2.0 - 2023-09-28 - Bunch more bug fixes
+
+* Record.from_rrs supports `source` parameter
+* Record.parse_rdata_text unquotes any quoted (string) values
+* Fixed a crash bug when using the YamlProvider with a directory that contains a mix of split and non-split zone YAMLs. See https://github.com/octodns/octodns/issues/1066
+* Fixed the discovery of zones from different sources when there are multiple dynamic zones. See https://github.com/octodns/octodns/issues/1068
+
+## v1.1.1 - 2023-09-16 - Doh! Fix that one little thing
+
+* Addressed a bug in the handling of loading auto-arpa manager configuration.
+
+## v1.1.0 - 2023-09-13 - More than enough for a minor release?
 
 * Added ZoneNameFilter processor to enable ignoring/alerting on type-os like
   octodns.com.octodns.com

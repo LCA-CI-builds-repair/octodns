@@ -2,9 +2,20 @@
 #
 #
 
-from logging import getLogger
-
-from ..equality import EqualityTupleMixin
+from logg    def parse_rdata_text(cls, value):
+        try:
+            key_tag, algorithm, digest_type, digest = value.split(' ')
+            key_tag = int(key_tag)
+            algorithm = int(algorithm)
+            digest_type = int(digest_type)
+            return {
+                'key_tag': key_tag,
+                'algorithm': algorithm,
+                'digest_type': digest_type,
+                'digest': digest,
+            }
+        except (ValueError, RrParseError):
+            raise RrParseError()from ..equality import EqualityTupleMixin
 from .base import Record, ValuesMixin
 from .rr import RrParseError
 

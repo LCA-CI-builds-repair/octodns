@@ -1,6 +1,18 @@
-# Contributing
+# Contributin1. Configure and install the dependencies: `./script/bootstrap`
+2. Activate the virtual environment: `source env/bin/activate`
+3. Ensure that the tests pass on your machine: `./script/test`
+4. Create a new branch: `git checkout -b my-branch-name`
+5. Make your changes, add tests, and verify that the tests still pass
+6. Ensure that `./script/lint` passes without any warnings
+7. Ensure that coverage is at 100% by running `./script/coverage` and opening `htmlcov/index.html`
+   - You can open PRs for review and discussion prior to this step
+8. Push to your fork and submit a pull request
 
-Hi there! We're thrilled that you'd like to contribute to octoDNS. Your help is essential for keeping it great.
+We will handle updating the version, tagging the release, and releasing the gem. Please refrain from bumping the version or attempting to take on these administrative tasks as part of your pull request.
+
+Here are a few things you can do that will increase the likelihood of your pull request being accepted:
+
+- Follow [pep8](https://www.python.org/dev/peps/pep-0008/)'re thrilled that you'd like to contribute to octoDNS. Your help is essential for keeping it great.
 
 Please note that this project adheres to the [Contributor Covenant Code of Conduct](/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 

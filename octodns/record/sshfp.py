@@ -2,7 +2,27 @@
 #
 #
 
-from ..equality import EqualityTupleMixin
+fro    VALID_ALGORITHMS = (1, 2, 3, 4)
+    VALID_FINGERPRINT_TYPES = (1, 2)
+
+    @classmethod
+    def parse_rdata_text(self, value):
+        try:
+            algorithm, fingerprint_type, fingerprint = value.split(' ')
+            algorithm = int(algorithm)
+            fingerprint_type = int(fingerprint_type)
+
+            if algorithm not in self.VALID_ALGORITHMS or fingerprint_type not in self.VALID_FINGERPRINT_TYPES:
+                raise RrParseError()
+            
+            fingerprint = unquote(fingerprint)
+            return {
+                'algorithm': algorithm,
+                'fingerprint_type': fingerprint_type,
+                'fingerprint': fingerprint,
+            }
+        except (ValueError, RrParseError):
+            raise RrParseError()ualityTupleMixin
 from .base import Record, ValuesMixin, unquote
 from .rr import RrParseError
 

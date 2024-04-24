@@ -2,7 +2,20 @@
 #
 #
 
-from ..equality import EqualityTupleMixin
+from ..equa            (
+                lat_degrees,
+                lat_minutes,
+                lat_seconds,
+                lat_direction,
+                long_degrees,
+                long_minutes,
+                long_seconds,
+                long_direction,
+                altitude,
+                size,
+                precision_horz,
+                precision_vert,
+            ) = value.split(' ')alityTupleMixin
 from .base import Record, ValuesMixin, unquote
 from .rr import RrParseError
 

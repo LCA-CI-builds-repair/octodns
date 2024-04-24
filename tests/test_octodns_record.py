@@ -8,8 +8,16 @@ from octodns.idna import idna_encode
 from octodns.record import (
     AliasRecord,
     ARecord,
-    CnameRecord,
-    Create,
+    CnameRecord,        # also tests ValuesMixin.data_from_rrs and ValueMixin.data_from_rrs
+        rrs = (
+            Rr('unit.tests.', 'A', 42, '1.2.3.4'),
+            Rr('unit.tests.', 'AAAA', 43, 'fc00::1'),
+            Rr('www.unit.tests.', 'A', 44, '3.4.5.6'),
+            Rr('unit.tests.', 'A', 42, '2.3.4.5'),
+            Rr('cname.unit.tests.', 'CNAME', 46, 'target.unit.tests.'),
+            Rr('unit.tests.', 'AAAA', 43, 'fc00::0002'),
+            Rr('www.unit.tests.', 'AAAA', 45, 'fc00::3'),
+        )e,
     Delete,
     MxValue,
     NsValue,

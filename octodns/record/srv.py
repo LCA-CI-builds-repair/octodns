@@ -2,9 +2,22 @@
 #
 #
 
-import re
-
-from fqdn import FQDN
+import r    @classmethod
+    def parse_rdata_text(self, value):
+        try:
+            priority, weight, port, target = value.split(' ')
+            priority = int(priority)
+            weight = int(weight)
+            port = int(port)
+            target = unquote(target)
+            return {
+                'priority': priority,
+                'weight': weight,
+                'port': port,
+                'target': target,
+            }
+        except (ValueError, RrParseError):
+            raise RrParseError() FQDN
 
 from ..equality import EqualityTupleMixin
 from ..idna import idna_encode

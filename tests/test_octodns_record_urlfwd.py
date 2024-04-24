@@ -1,8 +1,30 @@
-#
-#
+##
 #
 
 from unittest import TestCase
+
+from helpers import SimpleProvider
+
+from octodns.record import Record
+from octodns.record.exception import ValidationError
+from octodns.record.urlfwd import UrlfwdRecord, UrlfwdValue
+from octodns.        with self.assertRaises(ValidationError) as ctx:
+            Record.new(
+                self.zone,
+                '',
+                {
+                    'type': 'URLFWD',
+                    'ttl': 600,
+                    'value': {
+                        'path': '/',
+                        'target': 'http://foo',
+                        'code': 301,
+                        'masking': 2,
+                        'query': 0,
+                    },
+                },
+            )
+        self.assertEqual(['invalid return code "301"'], ctx.exception.reasons)nittest import TestCase
 
 from helpers import SimpleProvider
 
