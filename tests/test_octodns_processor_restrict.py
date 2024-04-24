@@ -1,6 +1,55 @@
-from unittest import TestCase
+from unittest import T        self.assertEqual(zone.r        # Test for TTL being too high
+        high = Record.new(
+            zone, 'high', {'type': 'A', 'ttl': 2048, 'value': '1.2.3.4'}
+        )
+        copy = zone.copy()
+        copy.add_record(high)
+        with self.assertRaises(RestrictionException) as ctx:
+            restrictor.process_source_zone(copy)
+        self.assertEqual(
+            'high.unit.tests. ttl=2048 too high, max_ttl=1024',
+            str(ctx.exception),
+        )
 
-from octodns.processor.restrict import (
+        # Test for TTL being too low with default values
+        restrictor = TtlRestrictionFilter('test')
+        low = Record.new(
+            zone, 'low', {'type': 'A', 'ttl': 0, 'value': '1.2.3.4'}
+        )
+        copy = zone.copy()
+        copy.add_record(low)
+        with self.assertRaises(RestrictionException) as ctx:
+            restrictor.process_source_zone(copy)
+        self.assertEqual(
+            'low.unit.tests. ttl=0 too low, min_ttl=1', str(ctx.exception)rds)
+
+        # Test for TTL being too low
+        low = Record.new(
+            zone, 'low', {'type': 'A', 'ttl': 16, 'value': '1.2.3.4'}
+        )
+        copy = zone.copy()
+        copy.add_record(low)
+        with self.assertRaises(RestrictionException) as ctx:
+            restrictor.process_source_zone(copy)
+        self.assertEqual(
+            'low.unit.tests. ttl=16 too low, min_ttl=32', str(ctx.exception)
+        )
+
+        # With lenient set, we can go lower
+        lenient = Record.new(
+            zone,
+            'low',
+            {
+                'octodns': {'lenient': True},
+                'type': 'A',
+                'ttl': 16,
+                'value': '1.2.3.4',
+            },
+        )
+        copy = zone.copy()
+        copy.add_record(lenient)
+        restricted = restrictor.process_source_zone(copy)
+        self.assertEqual(copy.records, restricted.records)or.restrict import (
     RestrictionException,
     TtlRestrictionFilter,
 )

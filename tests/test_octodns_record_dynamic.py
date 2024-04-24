@@ -43,8 +43,20 @@ class TestRecordDynamic(TestCase):
         new = Record.new(
             self.zone,
             'a',
-            {
-                'ttl': 44,
+            self.assertFalse(a.changes(b, simple))
+        
+        # Check changes for dynamic
+        update = a.changes(b, dynamic)
+        self.assertEqual(a, update.existing)
+        self.assertEqual(b, update.new)
+        
+        # Transitive check
+        self.assertFalse(b.changes(a, simple))
+        
+        # Check changes for dynamic (transitive)
+        update = b.changes(a, dynamic)
+        self.assertEqual(a, update.existing)
+        self.assertEqual(b, update.new)                'ttl': 44,
                 'type': 'A',
                 'value': '1.2.3.4',
                 'octodns': {

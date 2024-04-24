@@ -7,8 +7,40 @@ from unittest import TestCase
 from helpers import SimpleProvider
 
 from octodns.record import Record
-from octodns.record.caa import CaaRecord, CaaValue
-from octodns.record.exception import ValidationError
+from octodns.record.caa imp        a = CaaValue({'flags': 0, 'tag': 'a', 'value': 'v'})
+        b = CaaValue({'flags': 1, 'tag': 'a', 'value': 'v'})
+        c = CaaValue({'flags': 0, 'tag': 'c', 'value': 'v'})
+        d = CaaValue({'flags': 0, 'tag': 'a', 'value': 'z'})
+
+        # Test equality of CaaValue objects
+        self.assertEqual(a, a)
+        self.assertEqual(b, b)
+        self.assertEqual(c, c)
+        self.assertEqual(d, d)
+
+        # Test inequality of CaaValue objects
+        self.assertNotEqual(a, b)
+        self.assertNotEqual(a, c)
+        self.assertNotEqual(a, d)
+        self.assertNotEqual(b, a)
+        self.assertNotEqual(b, c)
+        self.assertNotEqual(b, d)
+        self.assertNotEqual(c, a)
+        self.assertNotEqual(c, b)
+        self.assertNotEqual(c, d)
+
+        # Test comparison of CaaValue objects
+        self.assertTrue(a < b)  # a should be less than b
+        self.assertTrue(a < c)  # a should be less than c
+        self.assertTrue(a < d)  # a should be less than d
+
+        self.assertTrue(b > a)  # b should be greater than a
+        self.assertTrue(b > c)  # b should be greater than c
+        self.assertTrue(b > d)  # b should be greater than d
+
+        self.assertTrue(c > a)  # c should be greater than a
+        self.assertTrue(c < b)  # c should be less than b
+        self.assertTrue(c > d)  # c should be greater than dodns.record.exception import ValidationError
 from octodns.record.rr import RrParseError
 from octodns.zone import Zone
 

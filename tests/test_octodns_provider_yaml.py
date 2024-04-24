@@ -5,7 +5,109 @@
 from os import makedirs, remove
 from os.path import dirname, isdir, isfile, join
 from shutil import rmtree
-from unittest import TestCase
+                self.assertTrue('_srv._tcp' not in data or 'values' in data['_srv._tcp'])
+                self.assertTrue('mx        # Test for ConstructorError when populating zone with source
+        with self.assertRaises(ConstructorError):
+            source.populate(zone)
+
+        # Initialize YamlProvider with specific configurations and populate zone
+        source = YamlProvider(
+            'test',
+            join(dirname(__file__), 'config'),
+            enforce_order=False,
+            supports_root_ns=False,
+        )
+        # No exception should be raised
+          # Test subzone handling by SplitYamlProvider
+        source = SplitYamlProvider(
+            'test', join(dirname(__file__), 'config/split'), extension='.tst'
+        )
+
+        # If we add `sub` as a sub-zone, we should reject `www.sub`
+        zone = Zone('unit.tests.', ['sub'])
+        with self.assertRaises(SubzoneRecordException) as ctx:
+            source.populate(zone)
+        msg = str(ctx.exception)
+        self.assertTrue(
+            msg.startswith(
+                'Record www.sub.unit.tests. is under a managed subzone'
+            )
+        )
+        self.assertTrue(msg.endswith('www.sub.yaml, line 3, column 3'))
+
+    def test_copy(self):
+        # Test copying properties of YamlProvider
+        source = YamlProvider(
+            'test',
+            42,
+            default_ttl=43,
+            enforce_order=44,
+            populate_should_replace=45,
+            supports_root_ns=46,
+        )
+        copy = source.copy()
+        self.assertEqual(source.directory, copy.directory)
+        self.assertEqual(source.default_ttl, copy.default_ttl)
+        self.assertEqual(source.enforce_order, copy.enforce_order)
+        self.assertEqual(
+            source.populate_should_replace, copy.populate_should_replace
+        )
+        self.assertEqual(source.supports_root_ns, copy.supports_root_ns)
+
+        # Test copying properties of SplitYamlProvider
+        source = SplitYamlProvider(
+            'test',
+            42,
+            default_ttl=43,
+            enforce_order=44,
+            populate_should_replace=45,
+            supports_root_ns=46,
+            extension='.tst'
+        )
+        copy = source.copy()
+        self.assertEqual(source.directory, copy.directory)
+        self.assertEqual(source.default_ttl, copy.default_ttl)
+        self.assertEqual(source.enforce_order, copy.enforce_order)
+        self.assertEqual(
+            source.populate_should_replace, copy.populate_should_replace
+        )
+        self.assertEqual(source.supports_root_ns, copy.supports_root_ns)
+        self.assertEqual(source.extension, copy.extension).assertEqual(2, len(zone.records))
+
+    def test_subzone_handling(self):
+        # Test subzone handling by YamlProvider
+        source = YamlProvider(
+            'test', join(dirname(__file__), 'config'), supports_root_ns=False
+        )
+
+        # If we add `sub` as a sub-zone, we should reject `www.sub`
+        zone = Zone('unit.tests.', ['sub'])
+        with self.assertRaises(SubzoneRecordException) as ctx:
+            source.populate(zone)
+        msg = str(ctx.exception)
+        self.assertTrue(
+            msg.startswith(
+                'Record www.sub.unit.tests. is under a managed subzone'
+            )
+        )
+        self.assertTrue(msg.endswith('unit.tests.yaml, line 201, column 3'))ata['mx'])
+                self.assertTrue('naptr' not in data or 'values' in data['naptr'])
+                self.assertTrue('sub' not in data or 'values' in data['sub'])
+                self.assertTrue('txt' not in data or 'values' in data['txt'])
+                self.assertTrue('loc' not in data or 'values' in data['loc'])
+                self.assertTrue('urlfwd' not in data or 'values' in data['urlfwd'])
+                self.assertTrue('sub.txt' not in data or 'values' in data['sub.txt'])
+                self.assertTrue('subzone' not in data or 'values' in data['subzone'])
+                # these are stored as singular 'value'
+                self.assertTrue('_imap._tcp' not in data or 'value' in data['_imap._tcp'])
+                self.assertTrue('_pop3._tcp' not in data or 'value' in data['_pop3._tcp'])
+                self.assertTrue('aaaa' not in data or 'value' in data['aaaa'])
+                self.assertTrue('cname' not in data or 'value' in data['cname'])
+                self.assertTrue('dname' not in data or 'value' in data['dname'])
+                self.assertTrue('included' not in data or 'value' in data['included'])
+                self.assertTrue('ptr' not in data or 'value' in data['ptr'])
+                self.assertTrue('spf' not in data or 'value' in data['spf'])
+                self.assertTrue('www' not in data or 'value' in data['www'])t TestCase
 
 from helpers import TemporaryDirectory
 from yaml import safe_load

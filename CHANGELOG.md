@@ -8,8 +8,16 @@
 ## v1.4.0 - 2023-12-04 - Minor Meta
 
 * Record.lenient property added similar to other common/standard _octodns data
-* Processor.process_source_and_target_zones added to support modifying both the
-  desired and/or existing zones just prior to computing changes.
+* Processor.process_source_and_target_zones added to support modifying* Added support for dynamic records to Ns1Provider and updated client and rate limiting implementation
+* Moved CI to use GitHub Actions
+* Set up Dependabot to automatically PR requirements updates
+* Improved the process of bumping all requirements and having Dependabot manage them going forward
+* Enhanced `dynamic` pool validation rules
+* Added delegation set support for Route53 and fixed CNAME/A ordering issues
+* Added DNSimple sandbox support
+* Added OVHProvider support for CAA
+* Renamed FastDNS to EdgeDNS for Akamai
+* Updated Transip to version 2.1.2, moving away from its SOAP API which is EOL'desired and/or existing zones just prior to computing changes.
 * Fix bug with Record.copy when values is an empty list []
 * Fix an issue in MetaProcessor/Manager.include_meta where include_provider
   wasn't correctly taking effect

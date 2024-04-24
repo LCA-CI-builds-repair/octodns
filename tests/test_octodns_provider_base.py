@@ -4,7 +4,39 @@
 
 from logging import getLogger
 from unittest import TestCase
-from unittest.mock import MagicMock, call
+from unit    def test_base_provider(self):
+        # Test for missing log property in BaseProvider
+        with self.assertRaises(NotImplementedError) as ctx:
+            BaseProvider('base')
+        self.assertEqual(
+            'Abstract base class, log property missing', str(ctx.exception)
+        )
+
+        # Test for missing SUPPORTS_GEO property in HasLog
+        class HasLog(BaseProvider):
+            log = getLogger('HasLog')
+
+        with self.assertRaises(NotImplementedError) as ctx:
+            HasLog('haslog')
+        self.assertEqual(
+            'Abstract base class, SUPPORTS_GEO property missing',
+            str(ctx.exception),
+        )
+
+        # Test for missing SUPPORTS property in HasSupportsGeo
+        class HasSupportsGeo(HasLog):
+            SUPPORTS_GEO = False
+
+        zone = Zone('unit.tests.', ['sub'])
+        with self.assertRaises(NotImplementedError) as ctx:
+            HasSupportsGeo('hassupportsgeo').populate(zone)
+        self.assertEqual(
+            'Abstract base class, SUPPORTS property missing', str(ctx.exception)
+        )
+
+        # Define SUPPORTS property in HasSupports
+        class HasSupports(HasSupportsGeo):
+            SUPPORTS = set(('A',))all
 
 from octodns.processor.base import BaseProcessor
 from octodns.provider import SupportsException

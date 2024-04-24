@@ -3,9 +3,115 @@
 #
 
 from os import environ, listdir
-from os.path import dirname, isfile, join
-from unittest import TestCase
-from unittest.mock import MagicMock, patch
+from os.path import dirname, isfile,        # Test for missing sources
+        with s        # Test for incorrect plan_output config
+        with self.assertRais        # Set up zones with UTF-8 encoded names
+        manager.config['zones'] = manager._config_zones(
+            {'déjà.vu.': {}, 'deja.vu.': {}, idna_encode('こんにちは.jp.'): {}}
+        )
+
+        # Test for missing sources for zone 'déjà.vu.'
+        with self.assertRaises(ManagerException) as ctx:
+            manager.sync(eligible_zones=('déjà.vu.',))
+        self.assertEqual('Zone déjà.vu. is missing sources', str(ctx.exception))
+
+        # Test for missing sources for zone 'deja.vu.'
+        with self.assertRaises(ManagerException) as ctx:
+            manager.sync(eligible_zones=('deja.vu.',))
+        self.assertEqual('Zone deja.vu. is missing sources', str(ctx.exception))
+
+             # Test configured_sub_zones for specific zones
+        self.assertEqual(
+            set(), manager.configured_sub_zones('another.sub.unit2.tests.')
+        )
+        self.assertEqual(
+            set(), manager.configured_sub_zones('skipped.alevel.unit2.tests.')
+        )
+
+        # Test configured_sub_zones with zones ending with names of others
+        manager.config['zones'] = {
+            'unit.tests.': {},
+            'uunit.tests.': {},
+            'uuunit.tests.': {},
+        }
+        manager._configured_sub_zones = None
+        self.assertEqual(set(), manager.configured_sub_zones('unit.tests.'))
+        self.assertEqual(set(), manager.configured_sub_zones('uunit.tests.'))
+        self.assertEqual(set(), manager.configured_sub_zones('uuunit.tests.')
+
+        # Test configured_sub_zones skipping multiple levels
+        manager.config['zones'] = {
+            'unit.tests.': {},
+            'foo.bar.baz.unit.tests.': {},
+        }
+        manager._configured_sub_zones = None
+        self.assertEqual(
+            {'foo.bar.baz'}, manager.configured_sub_zones('unit.tests.')
+        )
+        self.assertEqual(set(), manager.configured_sub_zones('foo.bar.baz.unit.tests.')s for zone 'こんにちは.jp.'
+        with self.assertRaises(ManagerException) as ctx:
+            manager.sync(eligible_zones=('こんにちは.jp.',))
+        self.assertEqual(
+            'Zone こんにちは.jp. is missing sources', str(ctx.exception)
+        )) as ctx:
+            Manager(get_config_filename('bad-plan-output-config.yaml')).sync()
+        self.assertTrue(
+            'Incorrect plan_output config for bad' in str(ctx.exception)
+        )
+
+    def test_source_only_as_a_target(self):
+        # Test for source only as a target
+        with self.assertRaises(ManagerException) as ctx:
+            Manager(get_config_filename('provider-problems.yaml')).sync(
+                ['not.targetable.']
+            )
+        self.assertTrue('does not support targeting' in str(ctx.exception))
+
+    def test_always_dry_run(self):es(ManagerException) as ctx:
+            Manager(get_config_filename('provider-problems.yaml')).sync(
+                ['missing.sources.']
+            )
+        self.assertTrue('missing sources' in str(ctx.exception))
+
+    def test_missing_zone(self):
+        # Test for missing zones
+        with self.assertRaises(ManagerException) as ctx:
+            Manager(get_config_filename('dynamic-config.yaml')).sync(
+                ['missing.zones.']
+            )
+        self.assertTrue('Requested zone:' in str(ctx.exception))
+
+    def test_missing_targets(self):
+        # Test for missing targets
+        with self.assertRaises(ManagerException) as ctx:
+            Manager(get_config_filename('provider-problems.yaml')).sync(
+                ['missing.targets.']
+            )
+        self.assertTrue('missing targets' in str(ctx.exception))
+
+    def test_unknown_source(self):
+        # Test for unknown source
+        with self.assertRaises(ManagerException) as ctx:
+            Manager(get_config_filename('provider-problems.yaml')).sync(
+                ['unknown.source.']
+            )
+        self.assertTrue('unknown source' in str(ctx.exception))
+
+    def test_unknown_target(self):
+        # Test for unknown target
+        with self.assertRaises(ManagerException) as ctx:
+            Manager(get_config_filename('provider-problems.yaml')).sync(
+                ['unknown.target.']
+            )
+        self.assertTrue('unknown target' in str(ctx.exception))
+
+    def test_bad_plan_output_class(self):
+        # Test for bad plan output class
+        with self.assertRaises(ManagerException) as ctx:
+            name = 'bad-plan-output-missing-class.yaml'
+            Manager(get_config_filename(name)).sync()
+        self.assertTrue(
+            'plan_output bad is missing class' in str(ctx.exception) unittest.mock import MagicMock, patch
 
 from helpers import (
     DynamicProvider,
