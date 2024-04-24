@@ -9,7 +9,31 @@ from helpers import SimpleProvider
 from octodns.record import Record
 from octodns.record.exception import ValidationError
 from octodns.record.mx import MxRecord, MxValue
-from octodns.record.rr import RrParseError
+from oc        with self.assertRaises(ValidationError) as ctx:
+            Record.new(
+                self.zone,
+                '',
+                {
+                    'type': 'MX',
+                    'ttl': 600,
+                    'value': {'preference': 10, 'exchange': 'foo.bar.com'},
+                },
+            )
+        self.assertEqual(
+            ['MX value "foo.bar.com" missing trailing .'], ctx.exception.reasons
+        )
+
+        # exchange must be a valid FQDN
+        with self.assertRaises(ValidationError) as ctx:
+            Record.new(
+                self.zone,
+                '',
+                {
+                    'type': 'MX',
+                    'ttl': 600,
+                    'value': {'preference': 10, 'exchange': 'foo.bar.com'},
+                },
+            ) RrParseError
 from octodns.zone import Zone
 
 

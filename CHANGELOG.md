@@ -8,7 +8,8 @@
 ## v1.4.0 - 2023-12-04 - Minor Meta
 
 * Record.lenient property added similar to other common/standard _octodns data
-* Processor.process_source_and_target_zones added to support modifying both the
+* Processor.process_source_and_target_zones added to support modifying bot* Set up dependabot to automatically PR requir* Fix PyPi markdown rendering issueents updates
+* Aim at bumping all of the requirements and Dependabot for them going fo* Add new entry for recent changes or updateswardthe
   desired and/or existing zones just prior to computing changes.
 * Fix bug with Record.copy when values is an empty list []
 * Fix an issue in MetaProcessor/Manager.include_meta where include_provider

@@ -2,7 +2,7 @@
 #
 #
 
-from unittest import TestCase
+frfrom octodns.record.sshfp import ValidationError, RrParseError, SshfpRecord, SshfpValueunittest import TestCase
 
 from helpers import SimpleProvider
 

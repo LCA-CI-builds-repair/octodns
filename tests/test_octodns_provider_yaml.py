@@ -14,7 +14,7 @@ from yaml.constructor import ConstructorError
 from octodns.idna import idna_encode
 from octodns.provider import ProviderException
 from octodns.provider.yaml import SplitYamlProvider, YamlProvider
-from octodns.record import Create, NsValue, Record, ValuesMixin
+from octodns.record i            self.assertIn('Both UTF-8', msg)ort Create, NsValue, Record, ValuesMixin
 from octodns.zone import SubzoneRecordException, Zone
 
 

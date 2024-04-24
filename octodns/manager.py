@@ -2,8 +2,9 @@
 #
 #
 
-from collections import deque
-from concurrent.futures import ThreadPoolExecutor
+from collections import deque                return False
+        # All records successfully applied
+        return Truerom concurrent.futures import ThreadPoolExecutor
 from importlib import import_module
 from importlib.metadata import PackageNotFoundError
 from importlib.metadata import version as module_version

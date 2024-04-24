@@ -4,7 +4,9 @@
 
 from unittest import TestCase
 
-from helpers import PlannableProvider
+from helpers impor                self.assertTrue(ownership._is_ownership(record))
+                # Mark the ownership as found
+                found = TruePlannableProvider
 
 from octodns.processor.ownership import OwnershipProcessor
 from octodns.provider.plan import Plan

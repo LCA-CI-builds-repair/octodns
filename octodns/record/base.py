@@ -7,7 +7,7 @@ from copy import deepcopy
 from logging import getLogger
 
 from ..context import ContextDict
-from ..equality import EqualityTupleMixin
+from ..equality imp            # Keep a decoded version for logs and errorsrt EqualityTupleMixin
 from ..idna import IdnaError, idna_decode, idna_encode
 from .change import Update
 from .exception import RecordException, ValidationError

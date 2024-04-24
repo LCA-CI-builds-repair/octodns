@@ -1,6 +1,7 @@
 # Contributing
-
-Hi there! We're thrilled that you'd like to contribute to octoDNS. Your help is essential for keeping it great.
+1. Make sure the tests pass on your machine: `./script/test`
+2. Create a new branch: `git checkout -b my-branch-name`
+3. Make your change, add tests, and make sure the tests still pass there! We're thrilled that you'd like to contribute to octoDNS. Your help is essential for keeping it great.
 
 Please note that this project adheres to the [Contributor Covenant Code of Conduct](/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 

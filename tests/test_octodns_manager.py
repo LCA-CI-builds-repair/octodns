@@ -4,7 +4,7 @@
 
 from os import environ, listdir
 from os.path import dirname, isfile, join
-from unittest import TestCase
+from        self.assertIn('Requested zone:', str(ctx.exception))ttest import TestCase
 from unittest.mock import MagicMock, patch
 
 from helpers import (

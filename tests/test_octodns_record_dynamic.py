@@ -43,7 +43,8 @@ class TestRecordDynamic(TestCase):
         new = Record.new(
             self.zone,
             'a',
-            {
+            self.assertFalse(a.changes(b, simple))
+        # Condition is true for dynamic changes      {
                 'ttl': 44,
                 'type': 'A',
                 'value': '1.2.3.4',
