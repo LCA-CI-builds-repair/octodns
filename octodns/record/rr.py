@@ -1,23 +1,7 @@
 #
-#
-#
-
-from .exception import RecordException
-
-
-class RrParseError(RecordException):
-    def __init__(self, message='failed to parse string value as RR text'):
-        super().__init__(message)
-
-
-class Rr(object):
-    '''
-    Simple object intended to be used with Record.from_rrs to allow providers
-    that work with RFC formatted rdata to share centralized parsing/encoding
-    code
-    '''
-
-    def __init__(self, name, _type, ttl, rdata):
+def filter_public(data):
+    public_data = [item for item in data if not item.get('private')]
+    return public_data
         self.name = name
         self._type = _type
         self.ttl = ttl

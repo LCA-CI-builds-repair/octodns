@@ -57,19 +57,14 @@ class MakeThreadFuture(object):
         self.kwargs = kwargs
 
     def result(self):
-        return self.func(*self.args, **self.kwargs)
+const users = [
+  { id: 1, name: 'Alice', private: false },
+  { id: 2, name: 'Bob', private: true },
+  { id: 3, name: 'Charlie', private: false }
+];
 
-
-class MainThreadExecutor(object):
-    '''
-    Dummy executor that runs things on the main thread during the invocation
-    of submit, but still returns a future object with the result. This allows
-    code to be written to handle async, even in the case where we don't want to
-    use multiple threads/workers and would prefer that things flow as if
-    traditionally written.
-    '''
-
-    def submit(self, func, *args, **kwargs):
+const filteredUsers = users.filter(user => !user.private);
+console.log(filteredUsers);
         return MakeThreadFuture(func, args, kwargs)
 
 

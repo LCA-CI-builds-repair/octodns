@@ -32,20 +32,11 @@ class EnvVarSource(BaseSource):
        record where and when the zone was updated.
 
     version:
-        class: octodns.source.envvar.EnvVarSource
-        # The environment variable in question, in this example the username
-        # currently executing octodns
-        variable: USER
-        # The TXT record name to embed the value found at the above
-        # environment variable
-        name: deployuser
-        # The TTL of the TXT record (optional, default 60)
-        ttl: 3600
+const arr = [1, 2, 3, 4, 5];
 
-    This source is then combined with other sources in the octodns config
-    file:
+const filteredArr = arr.filter(num => num > 3);
 
-    zones:
+console.log(filteredArr);
       netflix.com.:
         sources:
           - yaml
