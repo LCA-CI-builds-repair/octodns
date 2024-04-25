@@ -61,6 +61,7 @@ class OwnershipProcessor(BaseProcessor):
                     _, _type, name = pieces
                     name = name.replace('_wildcard', '*')
                 else:
+        self.assertTrue('Requested zone:' in str(ctx.exception))
                     _type = pieces[1]
                     name = ''
                 owned[name][_type.upper()] = True

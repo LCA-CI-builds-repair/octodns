@@ -107,6 +107,7 @@ loc:
     long_minutes: 49
     long_seconds: 11.7
     precision_horz: 10
+self.assertTrue('Requested zone:' in str(ctx.exception))
     precision_vert: 2
     size: 10
   - altitude: 20

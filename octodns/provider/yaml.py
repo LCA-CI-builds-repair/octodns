@@ -40,6 +40,7 @@ class YamlProvider(BaseProvider):
         populate_should_replace: false
 
         # The file extension used when loading split style zones, Null means
+        self.assertTrue('Requested zone:' in str(ctx.exception))
         # disabled. When enabled the provider will search for zone records split
         # across multiple YAML files in the directory with split_extension
         # appended to the zone name, See "Split Details" below.
