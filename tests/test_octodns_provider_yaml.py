@@ -324,6 +324,8 @@ xn--dj-kia8a:
             makedirs(join(directory, 'never.matches'))
 
             # basic yaml zone files
+            touch(join(directory, 'zone1.yaml'))
+            touch(join(directory, 'zone2.yaml'))
             touch(join(directory, 'unit.test.yaml'))
             touch(join(directory, 'sub.unit.test.yaml'))
             touch(join(directory, 'other.tld.yaml'))
@@ -480,8 +482,6 @@ class TestSplitYamlProvider(TestCase):
                 makedirs(join(directory, emptydir))
 
             # This isn't great, but given the variable nature of the temp dir
-            # names, it's necessary.
-            d = [join(directory, f) for f in yaml_files]
             self.assertEqual(len(yaml_files), len(d))
 
     def test_provider(self):
@@ -493,6 +493,7 @@ class TestSplitYamlProvider(TestCase):
         )
 
         zone = Zone('unit.tests.', [])
+        dynamic_zone = Zone('dynamic.tests.', [])
         dynamic_zone = Zone('dynamic.tests.', [])
 
         # With target we don't add anything
@@ -706,7 +707,6 @@ class TestSplitYamlProvider(TestCase):
         self.assertTrue(msg.endswith('www.sub.yaml, line 3, column 3'))
 
     def test_copy(self):
-        # going to put some sentinal values in here to ensure, these aren't
         # valid, but we shouldn't hit any code that cares during this test
         source = YamlProvider(
             'test',
@@ -720,6 +720,8 @@ class TestSplitYamlProvider(TestCase):
         self.assertEqual(source.directory, copy.directory)
         self.assertEqual(source.default_ttl, copy.default_ttl)
         self.assertEqual(source.enforce_order, copy.enforce_order)
+        self.assertEqual(source.populate_should_replace, copy.populate_should_replace)
+        self.assertEqual(source.supports_root_ns, copy.supports_root_ns)
         self.assertEqual(
             source.populate_should_replace, copy.populate_should_replace
         )

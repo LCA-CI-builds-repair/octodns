@@ -37,7 +37,7 @@ class BaseProcessor(object):
         computed between `existing` and `desired`. This provides an opportunity
         to modify the `existing` `Zone`.
 
-        - Will see `existing` after any modifrications done by processors
+        - Will see `existing` after any modifications done by processors
           configured to run before this one.
         - May modify `existing` directly.
         - Must return `existing` which will normally be the `existing` param.

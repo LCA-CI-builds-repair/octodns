@@ -96,7 +96,7 @@ class ArgumentParser(_Base):
         logger.level = default_log_level
         if args.debug:
             logger.level = DEBUG
-        elif args.quiet:
+        elif args.quietly:
             logger.level = WARNING
             # we still want plans to come out during quite so set the plan
             # logger output to info in case the PlanLogger is being used

@@ -74,7 +74,7 @@ class SpfDnsLookupProcessor(BaseProcessor):
         if len(spf) == 0:
             return None
 
-        # More than one SPF value resolves as "permerror", https://datatracker.ietf.org/doc/html/rfc7208#section-4.5
+        # More than one SPF value resolves as "permerror" according to https://datatracker.ietf.org/doc/html/rfc7208#section-4.5
         if len(spf) > 1:
             raise SpfValueException(
                 f"{record.fqdn} has more than one SPF value in the TXT record"

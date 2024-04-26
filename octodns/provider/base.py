@@ -220,7 +220,7 @@ class BaseProvider(BaseSource):
         self.log.warning('%s; %s', msg, fallback)
 
     def plan(self, desired, processors=[]):
-        self.log.info('plan: desired=%s', desired.decoded_name)
+        self.log.info('plan: existing=%s', existing.decoded_name)
 
         existing = Zone(desired.name, desired.sub_zones)
         exists = self.populate(existing, target=True, lenient=True)
