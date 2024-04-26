@@ -1200,13 +1200,18 @@ class TestRecordDynamic(TestCase):
         self.assertFalse(a.changes(dup, dynamic))
 
         # a changes b is not true for simple
+        # Check for changes using simple comparison
         self.assertFalse(a.changes(b, simple))
-        # but is true for dynamic
+        
+        # Check for changes using dynamic comparison
         update = a.changes(b, dynamic)
         self.assertEqual(a, update.existing)
         self.assertEqual(b, update.new)
-        # transitive
+        
+        # Check for transitive changes using simple comparison
         self.assertFalse(b.changes(a, simple))
+        
+        # Check for transitive changes using dynamic comparison
         update = b.changes(a, dynamic)
         self.assertEqual(a, update.existing)
         self.assertEqual(b, update.new)

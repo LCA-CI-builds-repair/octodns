@@ -79,10 +79,12 @@ class TestManager(TestCase):
             )
         self.assertTrue('missing sources' in str(ctx.exception))
 
+    # Test for missing zone
     def test_missing_zone(self):
         with self.assertRaises(ManagerException) as ctx:
             Manager(get_config_filename('dynamic-config.yaml')).sync(
                 ['missing.zones.']
+        )
             )
         self.assertTrue('Requested zone:' in str(ctx.exception))
 
