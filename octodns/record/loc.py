@@ -20,6 +20,8 @@ class LocValue(EqualityTupleMixin, dict):
             (
                 lat_degrees,
                 lat_minutes,
+                lat_degrees,
+                lat_minutes,
                 lat_seconds,
                 lat_direction,
                 long_degrees,
@@ -35,31 +37,14 @@ class LocValue(EqualityTupleMixin, dict):
             raise RrParseError()
         try:
             lat_degrees = int(lat_degrees)
-        except ValueError:
-            pass
-        try:
             lat_minutes = int(lat_minutes)
-        except ValueError:
-            pass
-        try:
             long_degrees = int(long_degrees)
-        except ValueError:
-            pass
-        try:
             long_minutes = int(long_minutes)
-        except ValueError:
-            pass
-        try:
             lat_seconds = float(lat_seconds)
-        except ValueError:
-            pass
-        try:
             long_seconds = float(long_seconds)
-        except ValueError:
-            pass
-        try:
             altitude = float(unquote(altitude))
         except ValueError:
+            pass
             pass
         try:
             size = float(unquote(size))

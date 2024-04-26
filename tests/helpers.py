@@ -42,9 +42,8 @@ class GeoProvider(object):
     id = 'test'
 
     def __init__(self, id='test'):
-        pass
-
     def populate(self, zone, source=False, lenient=False):
+        # Implement the logic to populate the zone based on the provided parameters
         pass
 
     def supports(self, record):
@@ -109,11 +108,13 @@ class PlannableProvider(BaseProvider):
         super().__init__(*args, **kwargs)
 
     def populate(self, zone, source=False, target=False, lenient=False):
+    def populate(self, zone, source=False, target=False, lenient=False):
+        # Implement the logic to populate the zone based on the provided parameters
         pass
 
     def supports(self, record):
+        # Implement logic to determine if the helper supports the given record
         return True
-
     def __repr__(self):
         return self.__class__.__name__
 

@@ -1,7 +1,4 @@
 #
-#
-#
-
 from logging import getLogger
 from typing import List, Optional
 
@@ -12,8 +9,8 @@ from octodns.record.base import Record
 
 from .base import BaseProcessor, ProcessorException
 
-
 class SpfValueException(ProcessorException):
+    # Add any necessary attributes or methods to the SpfValueException class
     pass
 
 

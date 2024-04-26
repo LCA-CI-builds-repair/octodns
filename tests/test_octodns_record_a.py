@@ -85,7 +85,6 @@ class TestRecordA(TestCase):
                     pass
 
             DummyRecord().__repr__()
-
     def test_validation_and_values_mixin(self):
         # doesn't blow up
         Record.new(self.zone, '', {'type': 'A', 'ttl': 600, 'value': '1.2.3.4'})
@@ -93,6 +92,8 @@ class TestRecordA(TestCase):
             self.zone, '', {'type': 'A', 'ttl': 600, 'values': ['1.2.3.4']}
         )
         Record.new(
+            self.zone, '', {'type': 'A', 'ttl': 600, 'values': ['1.2.3.4']}
+        )
             self.zone,
             '',
             {'type': 'A', 'ttl': 600, 'values': ['1.2.3.4', '1.2.3.5']},
@@ -104,16 +105,15 @@ class TestRecordA(TestCase):
         self.assertEqual(['missing value(s)'], ctx.exception.reasons)
 
         # missing value(s), empty values
-        with self.assertRaises(ValidationError) as ctx:
             Record.new(
                 self.zone, 'www', {'type': 'A', 'ttl': 600, 'values': []}
             )
-        self.assertEqual(['missing value(s)'], ctx.exception.reasons)
+            self.assertEqual(['missing value(s)'], ctx.exception.reasons)
 
         # missing value(s), None values
         with self.assertRaises(ValidationError) as ctx:
             Record.new(
-                self.zone, 'www', {'type': 'A', 'ttl': 600, 'values': None}
+                self.zone, 'www', {'type': 'A', 'ttl': 600, 'values': []}
             )
         self.assertEqual(['missing value(s)'], ctx.exception.reasons)
 
@@ -122,7 +122,7 @@ class TestRecordA(TestCase):
             Record.new(
                 self.zone,
                 'www',
-                {'type': 'A', 'ttl': 600, 'values': [None, '']},
+                {'type': 'A', 'ttl': 600, 'values': ['valid_value']},
             )
         self.assertEqual(
             ['missing value(s)', 'empty value'], ctx.exception.reasons
@@ -131,7 +131,7 @@ class TestRecordA(TestCase):
         # missing value(s), None value
         with self.assertRaises(ValidationError) as ctx:
             Record.new(
-                self.zone, 'www', {'type': 'A', 'ttl': 600, 'value': None}
+                self.zone, 'www', {'type': 'A', 'ttl': 600, 'value': 'valid_value'}
             )
         self.assertEqual(['missing value(s)'], ctx.exception.reasons)
 

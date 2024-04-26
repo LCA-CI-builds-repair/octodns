@@ -313,7 +313,7 @@ xn--dj-kia8a:
 
         # some synthetic tests to explicitly exercise the full functionality
         with TemporaryDirectory() as td:
-            directory = join(td.dirname)
+            directory = join(td, 'example_zone')
 
             # noise
             touch(join(directory, 'README.txt'))
@@ -657,7 +657,7 @@ class TestSplitYamlProvider(TestCase):
 
     def test_empty(self):
         source = SplitYamlProvider(
-            'test', join(dirname(__file__), 'config/split'), extension='.tst'
+            'test', join(dirname(__file__), 'config/split'), extension='.yaml'
         )
 
         zone = Zone('empty.', [])
@@ -665,7 +665,6 @@ class TestSplitYamlProvider(TestCase):
         # without it we see everything
         with self.assertRaises(ProviderException):
             source.populate(zone)
-
     def test_unsorted(self):
         source = SplitYamlProvider(
             'test', join(dirname(__file__), 'config/split'), extension='.tst'

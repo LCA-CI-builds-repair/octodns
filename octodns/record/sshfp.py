@@ -15,18 +15,17 @@ class SshfpValue(EqualityTupleMixin, dict):
     def parse_rdata_text(self, value):
         try:
             algorithm, fingerprint_type, fingerprint = value.split(' ')
+            algorithm = int(algorithm)
+            fingerprint_type = int(fingerprint_type)
+            fingerprint = unquote(fingerprint)
         except ValueError:
             raise RrParseError()
-        try:
-            algorithm = int(algorithm)
-        except ValueError:
-            pass
-        try:
-            fingerprint_type = int(fingerprint_type)
-        except ValueError:
-            pass
-        fingerprint = unquote(fingerprint)
+        
         return {
+            'algorithm': algorithm,
+            'fingerprint_type': fingerprint_type,
+            'fingerprint': fingerprint,
+        }
             'algorithm': algorithm,
             'fingerprint_type': fingerprint_type,
             'fingerprint': fingerprint,

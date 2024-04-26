@@ -14,24 +14,21 @@ class DsValue(EqualityTupleMixin, dict):
     log = getLogger('DsValue')
 
     @classmethod
-    def parse_rdata_text(cls, value):
+    def parse_rdata_text(cls, self, value):
         try:
             key_tag, algorithm, digest_type, digest = value.split(' ')
-        except ValueError:
-            raise RrParseError()
-        try:
             key_tag = int(key_tag)
-        except ValueError:
-            pass
-        try:
             algorithm = int(algorithm)
-        except ValueError:
-            pass
-        try:
             digest_type = int(digest_type)
         except ValueError:
-            pass
+            raise RrParseError()
+
         return {
+            'key_tag': key_tag,
+            'algorithm': algorithm,
+            'digest_type': digest_type,
+            'digest': digest,
+        }
             'key_tag': key_tag,
             'algorithm': algorithm,
             'digest_type': digest_type,

@@ -14,24 +14,16 @@ from .rr import RrParseError
 
 class SrvValue(EqualityTupleMixin, dict):
     @classmethod
-    def parse_rdata_text(self, value):
+    def parse_rdata_text(cls, self, value):
         try:
             priority, weight, port, target = value.split(' ')
+            priority = int(priority)
+            weight = int(weight)
+            port = int(port)
+            target = unquote(target)
         except ValueError:
             raise RrParseError()
-        try:
-            priority = int(priority)
-        except ValueError:
-            pass
-        try:
-            weight = int(weight)
-        except ValueError:
-            pass
-        try:
-            port = int(port)
-        except ValueError:
-            pass
-        target = unquote(target)
+        
         return {
             'priority': priority,
             'weight': weight,
