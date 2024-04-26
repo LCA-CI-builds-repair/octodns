@@ -17,8 +17,10 @@ class UrlfwdValue(EqualityTupleMixin, dict):
             data = (data,)
         reasons = []
         for value in data:
+            if isinstance(value, dict):  # Handle case where value is a dictionary
+                value = value['code']
             try:
-                code = int(value['code'])
+                code = int(value)
                 if code not in cls.VALID_CODES:
                     reasons.append(f'unrecognized return code "{code}"')
             except KeyError:
@@ -38,12 +40,12 @@ class UrlfwdValue(EqualityTupleMixin, dict):
                 if query not in cls.VALID_QUERY:
                     reasons.append(f'unrecognized query setting "{query}"')
             except KeyError:
-                reasons.append('missing query')
-            except ValueError:
-                reasons.append(f'invalid query setting "{value["query"]}"')
+                if 'query' in value:
+                    reasons.append(f'invalid query setting "{value["query"]}"')
             for k in ('path', 'target'):
                 if k not in value:
                     reasons.append(f'missing {k}')
+        return reasons
         return reasons
 
     @classmethod

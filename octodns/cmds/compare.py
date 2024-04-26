@@ -30,6 +30,8 @@ def main():
         required=True,
         help='Second source(s) to pull data from',
     )
+    import sys  # Add import statement for sys module
+
     parser.add_argument(
         '--zone', default=None, required=True, help='Zone to compare'
     )
@@ -52,9 +54,8 @@ def main():
     pprint(changes)
 
     # Exit with non-zero exit code if changes exist
-    if len(changes):
+    if changes:  # Change the condition to check if changes exist
         sys.exit(1)
-
 
 if __name__ == '__main__':
     main()

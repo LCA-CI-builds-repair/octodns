@@ -321,7 +321,7 @@ class ExcludeRootNsChanges(BaseProcessor):
         error: true
 
     zones:
-      exxampled.com.:
+      'exxampled.com.':
         sources:
           - config
         processors:
@@ -349,7 +349,7 @@ class ExcludeRootNsChanges(BaseProcessor):
                             ['root NS changes are disallowed'],
                             record.context,
                         )
-                    plan.changes.remove(change)
+                        plan.changes.remove(change)
 
             print(len(plan.changes))
 
@@ -369,7 +369,7 @@ class ZoneNameFilter(BaseProcessor):
         # (default: true)
 
     zones:
-      exxampled.com.:
+      'exxampled.com.':
         sources:
           - config
         processors:

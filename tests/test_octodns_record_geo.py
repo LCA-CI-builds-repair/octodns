@@ -83,30 +83,30 @@ class TestRecordGeoCodes(TestCase):
         # Just plain bad
         self.assertEqual(
             ['xyz invalid geo code "XX-YY-ZZ-AA"'],
-            GeoCodes.validate('XX-YY-ZZ-AA', prefix),
+            GeoCodes.validate('xyz', 'XX-YY-ZZ-AA'),
         )
         self.assertEqual(
             ['xyz unknown continent code "X-Y-Z"'],
-            GeoCodes.validate('X-Y-Z', prefix),
+            GeoCodes.validate('xyz', 'X-Y-Z'),
         )
         self.assertEqual(
             ['xyz unknown continent code "XXX-Y-Z"'],
-            GeoCodes.validate('XXX-Y-Z', prefix),
+            GeoCodes.validate('xyz', 'XXX-Y-Z'),
         )
 
         # Bad continent
         self.assertEqual(
-            ['xyz unknown continent code "XX"'], GeoCodes.validate('XX', prefix)
+            ['xyz unknown continent code "XX"'], GeoCodes.validate('xyz', 'XX')
         )
         # Bad continent good country
         self.assertEqual(
             ['xyz unknown continent code "XX-US"'],
-            GeoCodes.validate('XX-US', prefix),
+            GeoCodes.validate('xyz', 'XX-US'),
         )
         # Bad continent good country and province
         self.assertEqual(
             ['xyz unknown continent code "XX-US-OR"'],
-            GeoCodes.validate('XX-US-OR', prefix),
+            GeoCodes.validate('xyz', 'XX-US-OR'),
         )
 
         # Bad country, good continent

@@ -32,11 +32,11 @@ class YamlProvider(BaseProvider):
 
         # Whether or not to enforce sorting order when loading yaml
         # (optional, default True)
-        enforce_order: true
+        enforce_order: True
 
         # Whether duplicate records should replace rather than error
         # (optional, default False)
-        populate_should_replace: false
+        populate_should_replace: False
 
         # The file extension used when loading split style zones, Null means
         # disabled. When enabled the provider will search for zone records split
@@ -320,7 +320,7 @@ class YamlProvider(BaseProvider):
                             replace=self.populate_should_replace,
                         )
             self.log.debug(
-                '_populate_from_file: successfully loaded "%s"', filename
+                '_populate_from_file: successfully loaded "%s")', filename
             )
 
     def populate(self, zone, target=False, lenient=False):

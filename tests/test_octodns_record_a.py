@@ -45,8 +45,8 @@ class TestRecordA(TestCase):
             a == ARecord(self.zone, 'a', {'ttl': 31, 'values': a_values})
         )
         # Records with same name & type equate even if values are different
-        self.assertTrue(
-            a == ARecord(self.zone, 'a', {'ttl': 30, 'value': b_value})
+        self.assertEqual(
+            a, ARecord(self.zone, 'a', {'ttl': 30, 'value': b_value})
         )
 
         target = SimpleProvider()
@@ -79,7 +79,7 @@ class TestRecordA(TestCase):
         a.__repr__()
         # Record.__repr__ does
         with self.assertRaises(NotImplementedError):
-
+            a.__repr__()
             class DummyRecord(Record):
                 def __init__(self):
                     pass
@@ -113,7 +113,7 @@ class TestRecordA(TestCase):
         # missing value(s), None values
         with self.assertRaises(ValidationError) as ctx:
             Record.new(
-                self.zone, 'www', {'type': 'A', 'ttl': 600, 'values': None}
+                self.zone, 'www', {'type': 'A', 'ttl': 600, 'values': [None]}
             )
         self.assertEqual(['missing value(s)'], ctx.exception.reasons)
 
@@ -131,13 +131,13 @@ class TestRecordA(TestCase):
         # missing value(s), None value
         with self.assertRaises(ValidationError) as ctx:
             Record.new(
-                self.zone, 'www', {'type': 'A', 'ttl': 600, 'value': None}
+                self.zone, 'www', {'type': 'A', 'ttl': 600, 'values': [None]}
             )
         self.assertEqual(['missing value(s)'], ctx.exception.reasons)
 
         # empty value, empty string value
         with self.assertRaises(ValidationError) as ctx:
-            Record.new(self.zone, 'www', {'type': 'A', 'ttl': 600, 'value': ''})
+            Record.new(self.zone, 'www', {'type': 'A', 'ttl': 600, 'values': ['']})
         self.assertEqual(['empty value'], ctx.exception.reasons)
 
         # missing value(s) & ttl
@@ -150,7 +150,7 @@ class TestRecordA(TestCase):
         # invalid ipv4 address
         with self.assertRaises(ValidationError) as ctx:
             Record.new(
-                self.zone, '', {'type': 'A', 'ttl': 600, 'value': 'hello'}
+                self.zone, '', {'type': 'A', 'ttl': 600, 'values': ['hello']}
             )
         self.assertEqual(
             ['invalid IPv4 address "hello"'], ctx.exception.reasons

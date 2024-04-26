@@ -37,6 +37,7 @@ class GeoCodes(object):
             n > 2
             and pieces[2] not in geo_data[pieces[0]][pieces[1]]['provinces']
         ):
+        ):
             reasons.append(f'{prefix}unknown province code "{code}"')
 
         return reasons

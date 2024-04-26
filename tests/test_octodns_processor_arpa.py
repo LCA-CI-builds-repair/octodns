@@ -1,18 +1,18 @@
 #
-#
-#
-
-from unittest import TestCase
-
 from octodns.processor.arpa import AutoArpa
 from octodns.record import Record
 from octodns.record.exception import ValidationError
 from octodns.zone import Zone
 
-
 class TestAutoArpa(TestCase):
     def test_empty_zone(self):
         # empty zone no records
+        zone = Zone('unit.tests.', [])
+        aa = AutoArpa('auto-arpa', 'unit.tests.')
+        aa.process_source_zone(zone, [])
+        self.assertEqual(len(aa._records), 0)
+
+    def test_single_value_A(self):
         zone = Zone('unit.tests.', [])
         aa = AutoArpa('auto-arpa')
         aa.process_source_zone(zone, [])
@@ -21,13 +21,7 @@ class TestAutoArpa(TestCase):
     def test_single_value_A(self):
         zone = Zone('unit.tests.', [])
         record = Record.new(
-            zone, 'a', {'ttl': 32, 'type': 'A', 'value': '1.2.3.4'}
-        )
-        zone.add_record(record)
-        aa = AutoArpa('auto-arpa')
-        aa.process_source_zone(zone, [])
-        self.assertEqual(
-            {'4.3.2.1.in-addr.arpa.': {'a.unit.tests.'}}, aa._records
+            zone, 'a', {'ttl': 32, 'type': 'A', 'value': '1.2.3.4'})
         )
 
         # matching zone

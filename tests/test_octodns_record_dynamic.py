@@ -189,7 +189,7 @@ class TestRecordDynamic(TestCase):
         # smoke test of _DynamicMixin.__repr__
         a.__repr__()
         delattr(a, 'values')
-        a.value = 'abc'
+        a.values = 'abc'
         a.__repr__()
 
     def test_simple_aaaa_weighted(self):

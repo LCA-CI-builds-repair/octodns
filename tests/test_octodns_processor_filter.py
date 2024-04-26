@@ -197,7 +197,7 @@ class TestNetworkValueFilter(TestCase):
     def test_bad_config(self):
         with self.assertRaises(ValueError):
             filter_private = NetworkValueRejectlistFilter(
-                'rejectlist', set(('string', '42.42.42.42/43'))
+                'rejectlist', {'string', '42.42.42.42/43'})
             )
 
     def test_reject(self):
@@ -219,7 +219,7 @@ class TestNetworkValueFilter(TestCase):
         got = filter_private.process_source_zone(self.zone.copy())
         self.assertEqual(
             ['keep-me', 'private-ipv4', 'private-ipv6'],
-            sorted([r.name for r in got.records]),
+            sorted([r.name for r in got.records])
         )
 
 

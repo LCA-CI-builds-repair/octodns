@@ -308,20 +308,20 @@ xn--dj-kia8a:
                 'subzone.unit.tests.',
                 'unit.tests.',
             ],
-            list(provider.list_zones()),
+            list(provider.list_zones()))
         )
 
         # some synthetic tests to explicitly exercise the full functionality
         with TemporaryDirectory() as td:
-            directory = join(td.dirname)
+            directory = os.path.join(td.dirname)
 
             # noise
-            touch(join(directory, 'README.txt'))
+            touch(os.path.join(directory, 'README.txt'))
             # not a zone.name.yaml
-            touch(join(directory, 'production.yaml'))
+            touch(os.path.join(directory, 'production.yaml'))
             # non-zone directories
-            makedirs(join(directory, 'directory'))
-            makedirs(join(directory, 'never.matches'))
+            makedirs(os.path.join(directory, 'directory'))
+            makedirs(os.path.join(directory, 'never.matches'))
 
             # basic yaml zone files
             touch(join(directory, 'unit.test.yaml'))
@@ -706,7 +706,7 @@ class TestSplitYamlProvider(TestCase):
         self.assertTrue(msg.endswith('www.sub.yaml, line 3, column 3'))
 
     def test_copy(self):
-        # going to put some sentinal values in here to ensure, these aren't
+        # going to put some sentinel values in here to ensure, these aren't
         # valid, but we shouldn't hit any code that cares during this test
         source = YamlProvider(
             'test',
