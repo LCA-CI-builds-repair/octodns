@@ -250,9 +250,7 @@ class Manager(object):
                 processors[processor_name] = _class(processor_name, **kwargs)
                 self.log.info(
                     '__init__: processor=%s (%s %s)',
-                    processor_name,
-                    module,
-                    version,
+                    (processor_name, module, version)
                 )
             except TypeError:
                 self.log.exception('Invalid processor config')
@@ -262,11 +260,6 @@ class Manager(object):
         return processors
 
     def _config_plan_outputs(self, plan_outputs_config):
-        plan_outputs = {}
-        for plan_output_name, plan_output_config in plan_outputs_config.items():
-            context = getattr(plan_output_config, 'context', '')
-            try:
-                _class = plan_output_config.pop('class')
             except KeyError:
                 self.log.exception('Invalid plan_output class')
                 raise ManagerException(
@@ -284,15 +277,11 @@ class Manager(object):
                 if plan_output_name != '_logger':
                     self.log.info(
                         '__init__: plan_output=%s (%s %s)',
-                        plan_output_name,
-                        module,
-                        version,
+                        (plan_output_name, module, version)
                     )
             except TypeError:
                 self.log.exception('Invalid plan_output config')
                 raise ManagerException(
-                    f'Incorrect plan_output config for {plan_output_name}, {context}'
-                )
 
         return plan_outputs
 

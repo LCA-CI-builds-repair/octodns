@@ -104,7 +104,7 @@ class BaseProvider(BaseSource):
                             rules = record.dynamic.rules
 
                             # drop subnet rules in reverse order so indices don't shift during rule deletion
-                            for i in sorted(subnet_rules, reverse=True):
+                            for i in sorted(list(subnet_rules.keys()), reverse=True):
                                 rule = rules[i].data
                                 if rule.get('geos'):
                                     del rule['subnets']

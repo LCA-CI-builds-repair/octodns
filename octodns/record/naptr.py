@@ -11,23 +11,11 @@ class NaptrValue(EqualityTupleMixin, dict):
     VALID_FLAGS = ('S', 'A', 'U', 'P')
 
     @classmethod
-    def parse_rdata_text(cls, value):
-        try:
-            (
-                order,
-                preference,
-                flags,
-                service,
-                regexp,
-                replacement,
-            ) = value.split(' ')
-        except ValueError:
-            raise RrParseError()
         try:
             order = int(order)
             preference = int(preference)
         except ValueError:
-            pass
+            raise RrParseError()
         flags = unquote(flags)
         service = unquote(service)
         regexp = unquote(regexp)

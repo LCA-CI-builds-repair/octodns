@@ -313,7 +313,7 @@ xn--dj-kia8a:
 
         # some synthetic tests to explicitly exercise the full functionality
         with TemporaryDirectory() as td:
-            directory = join(td.dirname)
+            directory = td.dirname
 
             # noise
             touch(join(directory, 'README.txt'))

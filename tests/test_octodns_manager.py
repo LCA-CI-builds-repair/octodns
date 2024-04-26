@@ -84,7 +84,7 @@ class TestManager(TestCase):
             Manager(get_config_filename('dynamic-config.yaml')).sync(
                 ['missing.zones.']
             )
-        self.assertTrue('Requested zone:' in str(ctx.exception))
+        self.assertIn('Requested zone:', str(ctx.exception))
 
     def test_missing_targets(self):
         with self.assertRaises(ManagerException) as ctx:
@@ -677,16 +677,13 @@ class TestManager(TestCase):
         )
 
         with self.assertRaises(ManagerException) as ctx:
-            Manager(get_config_filename('processors-missing-class.yaml'))
-        self.assertTrue(
-            'Processor no-class is missing class' in str(ctx.exception)
-        )
+        with self.assertRaises(ManagerException) as ctx:
+            Manager(get_config_filename('processors-missing-class.yaml')).sync()
+        self.assertIn('Processor no-class is missing class', str(ctx.exception))
 
         with self.assertRaises(ManagerException) as ctx:
-            Manager(get_config_filename('processors-wants-config.yaml'))
-        self.assertTrue(
-            'Incorrect processor config for wants-config' in str(ctx.exception)
-        )
+            Manager(get_config_filename('processors-wants-config.yaml')).sync()
+        self.assertIn('Incorrect processor config for wants-config', str(ctx.exception))
 
     def test_processors(self):
         manager = Manager(get_config_filename('simple.yaml'))

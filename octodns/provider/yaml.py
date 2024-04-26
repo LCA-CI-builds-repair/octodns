@@ -285,7 +285,7 @@ class YamlProvider(BaseProvider):
             return []
 
         for filename in listdir(directory):
-            if filename.endswith('.yaml'):
+            if filename.lower().endswith('.yaml'):
                 yield join(directory, filename)
 
     def _zone_sources(self, zone):
@@ -321,7 +321,7 @@ class YamlProvider(BaseProvider):
                             replace=self.populate_should_replace,
                         )
             self.log.debug(
-                '_populate_from_file: successfully loaded "%s"', filename
+                '_populate_from_file: successfully loaded "%s")', filename
             )
 
     def populate(self, zone, target=False, lenient=False):
@@ -351,16 +351,7 @@ class YamlProvider(BaseProvider):
                 sources.append(source)
 
         if self.shared_filename:
-            sources.append(join(self.directory, self.shared_filename))
-
-        if not sources:
-            raise ProviderException(f'no YAMLs found for {zone.decoded_name}')
-
-        # determinstically order our sources
-        sources.sort()
-
-        for source in sources:
-            self._populate_from_file(source, zone, lenient)
+        # deterministically order our sources
 
         self.log.info(
             'populate:   found %s records, exists=False',
@@ -411,32 +402,25 @@ class YamlProvider(BaseProvider):
                 makedirs(directory)
 
             catchall = {}
-            for record, config in data.items():
-                if self.split_catchall and record in self.CATCHALL_RECORD_NAMES:
-                    catchall[record] = config
-                    continue
-                filename = join(directory, f'{record}.yaml')
-                self.log.debug('_apply:   writing filename=%s', filename)
+            if not isdir(directory):
+                self.log.debug('_apply: creating split directory=%s)', directory)
 
                 with open(filename, 'w') as fh:
                     record_data = {record: config}
                     safe_dump(record_data, fh)
 
             if catchall:
-                # Scrub the trailing . to make filenames more sane.
-                filename = join(directory, f'${decoded_name}.yaml')
-                self.log.debug(
-                    '_apply:   writing catchall filename=%s', filename
-                )
+            catchall = {}
+            for record in list(data.keys()):
+                if self.split_catchall and record in self.CATCHALL_RECORD_NAMES:
+                    catchall[record] = data[record]
+                    continue
                 with open(filename, 'w') as fh:
                     safe_dump(catchall, fh)
 
         else:
-            # single large file
-            filename = join(self.directory, f'{desired.decoded_name}yaml')
-            self.log.debug('_apply:   writing filename=%s', filename)
-            with open(filename, 'w') as fh:
-                safe_dump(dict(data), fh, allow_unicode=True)
+            if catchall:
+                # Scrub the trailing . to make filenames more human-readable.
 
 
 class SplitYamlProvider(YamlProvider):

@@ -147,10 +147,11 @@ class _GeoMixin(ValuesMixin):
                 stacklevel=99,
             )
             for code, values in geo.items():
-                reasons.extend(GeoValue._validate_geo(code))
-                reasons.extend(cls._value_type.validate(values, cls._type))
-        except KeyError:
-            pass
+                try:
+                    reasons.extend(GeoValue._validate_geo(code))
+                    reasons.extend(cls._value_type.validate(values, cls._type))
+                except KeyError:
+                    pass
         return reasons
 
     def __init__(self, zone, name, data, *args, **kwargs):
