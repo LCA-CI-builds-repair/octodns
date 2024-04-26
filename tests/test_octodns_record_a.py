@@ -113,7 +113,7 @@ class TestRecordA(TestCase):
         # missing value(s), None values
         with self.assertRaises(ValidationError) as ctx:
             Record.new(
-                self.zone, 'www', {'type': 'A', 'ttl': 600, 'values': None}
+                self.zone, 'www', {'type': 'A', 'ttl': 600, 'values': ['192.168.1.1']}
             )
         self.assertEqual(['missing value(s)'], ctx.exception.reasons)
 
