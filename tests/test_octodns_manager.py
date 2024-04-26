@@ -87,6 +87,7 @@ class TestManager(TestCase):
         self.assertTrue('Requested zone:' in str(ctx.exception))
 
     def test_missing_targets(self):
+        # Add the test logic for the test_missing_targets function here
         with self.assertRaises(ManagerException) as ctx:
             Manager(get_config_filename('provider-problems.yaml')).sync(
                 ['missing.targets.']
@@ -404,7 +405,6 @@ class TestManager(TestCase):
             )
 
             # make sure this fails with an ManagerException and not a KeyError
-            # when trying to find sub zones
             with self.assertRaises(ManagerException):
                 manager.dump(
                     zone='unknown.zone.',
@@ -676,6 +676,7 @@ class TestManager(TestCase):
             'doesnt-exist' in str(ctx.exception)
         )
 
+        with self.assertRaises(ManagerException) as ctx:
         with self.assertRaises(ManagerException) as ctx:
             Manager(get_config_filename('processors-missing-class.yaml'))
         self.assertTrue(

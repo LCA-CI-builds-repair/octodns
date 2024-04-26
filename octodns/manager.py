@@ -371,9 +371,10 @@ class Manager(object):
                     try:
                         # try converting the value to a number to see if it
                         # converts
-                        v = float(v)
-                    except ValueError:
-                        pass
+                        try:
+                            v = float(v)
+                        except ValueError as e:
+                            logger.error(f"Error converting value to float: {e}")
 
             kwargs[k] = v
 

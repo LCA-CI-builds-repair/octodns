@@ -60,19 +60,19 @@ class LocValue(EqualityTupleMixin, dict):
         try:
             altitude = float(unquote(altitude))
         except ValueError:
-            pass
+            altitude = None
         try:
             size = float(unquote(size))
         except ValueError:
-            pass
+            size = None
         try:
             precision_horz = float(unquote(precision_horz))
         except ValueError:
-            pass
+            precision_horz = None
         try:
             precision_vert = float(unquote(precision_vert))
         except ValueError:
-            pass
+            precision_vert = None
         lat_direction = unquote(lat_direction)
         long_direction = unquote(long_direction)
         return {

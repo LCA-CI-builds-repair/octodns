@@ -19,6 +19,14 @@ class TestAutoArpa(TestCase):
         self.assertFalse(aa._records)
 
     def test_single_value_A(self):
+import unittest
+from octodns.processor.arpa import AutoArpa
+from octodns.record import Record
+from octodns.zone import Zone
+
+class TestOctoDnsProcessorArpa(unittest.TestCase):
+
+    def test_process_arpa_records(self):
         zone = Zone('unit.tests.', [])
         record = Record.new(
             zone, 'a', {'ttl': 32, 'type': 'A', 'value': '1.2.3.4'}
@@ -73,14 +81,14 @@ class TestAutoArpa(TestCase):
         self.assertEqual(1600, ptr_2.ttl)
 
     def test_AAAA(self):
-        zone = Zone('unit.tests.', [])
-        record = Record.new(
-            zone, 'aaaa', {'ttl': 32, 'type': 'AAAA', 'value': 'ff:0c::4:2'}
-        )
-        zone.add_record(record)
-        aa = AutoArpa('auto-arpa')
-        aa.process_source_zone(zone, [])
-        ip6_arpa = '2.0.0.0.4.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.c.0.0.0.f.f.0.0.ip6.arpa.'
+import unittest
+from octodns.processor.arpa import AutoArpa
+from octodns.record import Record
+from octodns.zone import Zone
+
+class TestOctoDnsProcessorArpa(unittest.TestCase):
+
+    def test_process_arpa_records(self):
         self.assertEqual({ip6_arpa: {'aaaa.unit.tests.'}}, aa._records)
 
         # matching zone
@@ -91,6 +99,16 @@ class TestAutoArpa(TestCase):
         self.assertEqual(ip6_arpa, ptr.fqdn)
         self.assertEqual(record.fqdn, ptr.value)
 
+        # matching zone
+            'geo',
+            {
+                'ttl': 32,
+                'type': 'A',
+                'values': ['1.2.3.4', '1.2.3.5'],
+                'geo': {
+                    'AF': ['1.1.1.1']
+                }
+            }
         # other zone
         arpa = Zone('c.0.0.0.e.f.0.0.ip6.arpa.', [])
         aa.populate(arpa)

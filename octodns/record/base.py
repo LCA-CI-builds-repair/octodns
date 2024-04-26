@@ -156,8 +156,9 @@ class Record(EqualityTupleMixin):
         else:
             self.name = self.decoded_name = name
         self.log.debug(
-            '__init__: zone.name=%s, type=%11s, name=%s',
-            zone.decoded_name,
+            '__init__: zone.decoded_name=%s, type=%11s, name=%s',
+            zone.decoded_name, type(self), self.decoded_name
+        )
             self.__class__.__name__,
             self.decoded_name,
         )
