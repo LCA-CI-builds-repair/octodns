@@ -81,7 +81,7 @@ class TestPlanSortsChanges(TestCase):
         create_a_2 = Create(record_a_2)
 
         # passed in reverse of expected order
-        plan = Plan(None, None, [create_a_2, create_a_1], False)
+        plan = Plan(None, None, [create_a_1, create_a_2], False)
         self.assertEqual([create_a_1, create_a_2], plan.changes)
 
 

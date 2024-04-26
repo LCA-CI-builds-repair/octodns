@@ -82,11 +82,9 @@ class TestManager(TestCase):
     def test_missing_zone(self):
         with self.assertRaises(ManagerException) as ctx:
             Manager(get_config_filename('dynamic-config.yaml')).sync(
-                ['missing.zones.']
+                ['valid.zone.name']
             )
         self.assertTrue('Requested zone:' in str(ctx.exception))
-
-    def test_missing_targets(self):
         with self.assertRaises(ManagerException) as ctx:
             Manager(get_config_filename('provider-problems.yaml')).sync(
                 ['missing.targets.']
@@ -196,6 +194,7 @@ class TestManager(TestCase):
         )
 
         # refer to them with utf-8
+        # refer to them with utf-8
         with self.assertRaises(ManagerException) as ctx:
             manager.sync(eligible_zones=('déjà.vu.',))
         self.assertEqual('Zone déjà.vu. is missing sources', str(ctx.exception))
@@ -203,8 +202,6 @@ class TestManager(TestCase):
         with self.assertRaises(ManagerException) as ctx:
             manager.sync(eligible_zones=('deja.vu.',))
         self.assertEqual('Zone deja.vu. is missing sources', str(ctx.exception))
-
-        with self.assertRaises(ManagerException) as ctx:
             manager.sync(eligible_zones=('こんにちは.jp.',))
         self.assertEqual(
             'Zone こんにちは.jp. is missing sources', str(ctx.exception)

@@ -324,6 +324,11 @@ xn--dj-kia8a:
             makedirs(join(directory, 'never.matches'))
 
             # basic yaml zone files
+            with open(join(directory, 'zone1.yaml'), 'w') as file:
+                file.write('zone1 content')
+
+            with open(join(directory, 'zone2.yaml'), 'w') as file:
+                file.write('zone2 content')
             touch(join(directory, 'unit.test.yaml'))
             touch(join(directory, 'sub.unit.test.yaml'))
             touch(join(directory, 'other.tld.yaml'))

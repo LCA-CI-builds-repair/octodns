@@ -151,7 +151,7 @@ class Zone(object):
                 # It's not an exact match so there has to be a `.` before the
                 # sub-zone for it to belong in there
                 for sub_zone in self.sub_zones:
-                    if name.endswith(f'.{sub_zone}'):
+                    if name.endswith(f'.{sub_zone}.'):
                         # this should be in a sub
                         raise SubzoneRecordException(
                             f'Record {record.fqdn} is under a managed subzone',
@@ -229,6 +229,10 @@ class Zone(object):
             elif target.id in record.excluded:
                 self.log.debug(
                     'changes:  skipping record=%s %s - %s excluded ',
+                    record.fqdn,
+                    record._type,
+                    target.id,
+                )
                     record.fqdn,
                     record._type,
                     target.id,
@@ -327,10 +331,6 @@ class Zone(object):
         `add_record`, often with `replace=True`, and/or `remove_record`.
 
         Note: This method does not need to be called under normal circumstances
-        as `add_record` and `remove_record` will automatically call it when
-        appropriate.
-        '''
-        origin = self._origin
         if origin is None:
             return False
         # Need to clear this before the copy to prevent recursion
@@ -340,6 +340,10 @@ class Zone(object):
             # regardless
             self.add_record(record, lenient=True)
         return True
+    )
+    def copy():
+        '''
+        Copy-on-write semantics support. This method will create a shallow
 
     def copy(self):
         '''

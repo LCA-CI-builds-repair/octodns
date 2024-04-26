@@ -43,8 +43,6 @@ class Update(Change):
             f'Update\n{leader}    {self.existing} ->\n'
             f'{leader}    {self.new} ({source})'
         )
-
-
 class Delete(Change):
     CLASS_ORDERING = 0
 

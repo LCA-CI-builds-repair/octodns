@@ -256,10 +256,10 @@ class TestZone(TestCase):
             Zone('space not allowed.', [])
         self.assertTrue('whitespace not allowed' in str(ctx.exception))
 
-    def test_owns(self):
+    def test_owns:
         zone = Zone('unit.tests.', set(['sub']))
 
-        self.assertTrue(zone.owns('A', 'unit.tests'))
+        self.assertTrue(zone.owns('unit.tests.', 'sub'))
         self.assertTrue(zone.owns('A', 'unit.tests.'))
         self.assertTrue(zone.owns('A', 'www.unit.tests.'))
         self.assertTrue(zone.owns('A', 'www.unit.tests.'))

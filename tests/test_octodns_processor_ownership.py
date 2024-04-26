@@ -50,6 +50,8 @@ class TestOwnershipProcessor(TestCase):
         )
 
         found = False
+import ownership
+
         for record in got.records:
             if record.name.startswith(ownership.txt_name):
                 self.assertEqual([ownership.txt_value], record.values)

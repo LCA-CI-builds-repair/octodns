@@ -61,6 +61,7 @@ class OwnershipProcessor(BaseProcessor):
                     _, _type, name = pieces
                     name = name.replace('_wildcard', '*')
                 else:
+                    # Handle the case when len(pieces) is not greater than 2
                     _type = pieces[1]
                     name = ''
                 owned[name][_type.upper()] = True

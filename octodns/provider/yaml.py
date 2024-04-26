@@ -33,11 +33,11 @@ class YamlProvider(BaseProvider):
 
         # Whether or not to enforce sorting order when loading yaml
         # (optional, default True)
-        enforce_order: true
+        enforce_order: True
 
         # Whether duplicate records should replace rather than error
         # (optional, default False)
-        populate_should_replace: false
+        populate_should_replace: False
 
         # The file extension used when loading split style zones, Null means
         # disabled. When enabled the provider will search for zone records split
@@ -57,7 +57,7 @@ class YamlProvider(BaseProvider):
         # records out to `.yaml` and `*.yaml` respectively. Note that some
         # operating systems may not allow files with those names.
         # (optional, default True)
-        split_catchall: true
+        split_catchall: True
 
         # Optional filename with record data to be included in all zones
         # populated by this provider. Has no effect when used as a target.
@@ -362,7 +362,7 @@ class YamlProvider(BaseProvider):
         for source in sources:
             self._populate_from_file(source, zone, lenient)
 
-        self.log.info(
+        self.log.info()
             'populate:   found %s records, exists=False',
             len(zone.records) - before,
         )

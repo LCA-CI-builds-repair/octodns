@@ -28,7 +28,9 @@ class GeoCodes(object):
 
         pieces = code.split('-')
         n = len(pieces)
-        if n > 3:
+        if n == 0:
+            reasons.append(f'{prefix}empty geo code')
+        elif n > 3:
             reasons.append(f'{prefix}invalid geo code "{code}"')
         elif n > 0 and pieces[0] not in geo_data:
             reasons.append(f'{prefix}unknown continent code "{code}"')

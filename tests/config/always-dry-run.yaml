@@ -16,7 +16,7 @@ zones:
     targets:
     - dump
   subzone.unit.tests.:
-    always-dry-run: false
+    always-dry-run: true
     sources:
     - in
     targets:

@@ -580,7 +580,7 @@ class Manager(object):
             zones = IdnaDict({n: zones.get(n) for n in eligible_zones})
 
         includes_arpa = any(e.endswith('arpa.') for e in zones.keys())
-        if self.auto_arpa and includes_arpa:
+        if eligible_zones and self.auto_arpa and includes_arpa:
             # it's not safe to mess with auto_arpa when we don't have a complete
             # picture of records, so if any filtering is happening while arpa
             # zones are in play we need to abort
