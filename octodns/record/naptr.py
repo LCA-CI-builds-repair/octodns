@@ -27,6 +27,7 @@ class NaptrValue(EqualityTupleMixin, dict):
             order = int(order)
             preference = int(preference)
         except ValueError:
+            # Handle value errors for order and preference
             pass
         flags = unquote(flags)
         service = unquote(service)

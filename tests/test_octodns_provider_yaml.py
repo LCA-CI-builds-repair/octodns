@@ -313,11 +313,9 @@ xn--dj-kia8a:
 
         # some synthetic tests to explicitly exercise the full functionality
         with TemporaryDirectory() as td:
-            directory = join(td.dirname)
+            directory = join(td, 'dirname')
 
-            # noise
             touch(join(directory, 'README.txt'))
-            # not a zone.name.yaml
             touch(join(directory, 'production.yaml'))
             # non-zone directories
             makedirs(join(directory, 'directory'))

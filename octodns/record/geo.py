@@ -150,6 +150,7 @@ class _GeoMixin(ValuesMixin):
                 reasons.extend(GeoValue._validate_geo(code))
                 reasons.extend(cls._value_type.validate(values, cls._type))
         except KeyError:
+            # Handle KeyError specifically
             pass
         return reasons
 

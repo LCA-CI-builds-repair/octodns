@@ -109,6 +109,7 @@ class BaseProvider(BaseSource):
                                 if rule.get('geos'):
                                     del rule['subnets']
                                 else:
+                                    # Using a safe method to delete elements from the list
                                     del rules[i]
 
                             # drop any pools rendered unused

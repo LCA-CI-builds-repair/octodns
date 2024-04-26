@@ -356,8 +356,9 @@ class YamlProvider(BaseProvider):
         if not sources:
             raise ProviderException(f'no YAMLs found for {zone.decoded_name}')
 
-        # determinstically order our sources
-        sources.sort()
+        # deterministically order our sources
+        if sources:
+            sources.sort()
 
         for source in sources:
             self._populate_from_file(source, zone, lenient)
