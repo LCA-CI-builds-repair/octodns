@@ -710,11 +710,6 @@ class TestSplitYamlProvider(TestCase):
         # valid, but we shouldn't hit any code that cares during this test
         source = YamlProvider(
             'test',
-            42,
-            default_ttl=43,
-            enforce_order=44,
-            populate_should_replace=45,
-            supports_root_ns=46,
         )
         copy = source.copy()
         self.assertEqual(source.directory, copy.directory)
