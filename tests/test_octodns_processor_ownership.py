@@ -58,8 +58,7 @@ class TestOwnershipProcessor(TestCase):
                 found = True
             else:
                 self.assertFalse(ownership._is_ownership(record))
-        self.assertTrue(found)
-
+        self.assertTrue(found, 'Requested zone not found in records')
     def test_process_plan(self):
         ownership = OwnershipProcessor('ownership')
         provider = PlannableProvider('helper')
