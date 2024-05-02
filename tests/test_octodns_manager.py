@@ -88,6 +88,7 @@ class TestManager(TestCase):
 
     def test_missing_targets(self):
         with self.assertRaises(ManagerException) as ctx:
+        # Add missing code here
             Manager(get_config_filename('provider-problems.yaml')).sync(
                 ['missing.targets.']
             )
