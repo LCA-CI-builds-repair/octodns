@@ -16,7 +16,6 @@ class Rr(object):
     that work with RFC formatted rdata to share centralized parsing/encoding
     code
     '''
-
     def __init__(self, name, _type, ttl, rdata):
         self.name = name
         self._type = _type

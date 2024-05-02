@@ -44,7 +44,6 @@ class EnvVarSource(BaseSource):
 
     This source is then combined with other sources in the octodns config
     file:
-
     zones:
       netflix.com.:
         sources:

@@ -68,7 +68,6 @@ class MainThreadExecutor(object):
     use multiple threads/workers and would prefer that things flow as if
     traditionally written.
     '''
-
     def submit(self, func, *args, **kwargs):
         return MakeThreadFuture(func, args, kwargs)
 
