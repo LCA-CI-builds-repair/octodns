@@ -154,10 +154,10 @@ class TestRecord(TestCase):
             Rr('unit.tests.', 'AAAA', 43, 'fc00::1'),
             Rr('www.unit.tests.', 'A', 44, '3.4.5.6'),
             Rr('unit.tests.', 'A', 42, '2.3.4.5'),
+        )
             Rr('cname.unit.tests.', 'CNAME', 46, 'target.unit.tests.'),
             Rr('unit.tests.', 'AAAA', 43, 'fc00::0002'),
             Rr('www.unit.tests.', 'AAAA', 45, 'fc00::3'),
-        )
 
         zone = Zone('unit.tests.', [])
         records = {
@@ -185,6 +185,7 @@ class TestRecord(TestCase):
     def test_parse_rdata_texts(self):
         self.assertEqual(['2.3.4.5'], ARecord.parse_rdata_texts(['2.3.4.5']))
         self.assertEqual(
+            ['2.3.4.6', '3.4.5.7'],
             ['2.3.4.6', '3.4.5.7'],
             ARecord.parse_rdata_texts(['2.3.4.6', '3.4.5.7']),
         )
