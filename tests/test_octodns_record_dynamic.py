@@ -1205,7 +1205,7 @@ class TestRecordDynamic(TestCase):
         update = a.changes(b, dynamic)
         self.assertEqual(a, update.existing)
         self.assertEqual(b, update.new)
-        # transitive
+        # transitive for simple changes
         self.assertFalse(b.changes(a, simple))
         update = b.changes(a, dynamic)
         self.assertEqual(a, update.existing)

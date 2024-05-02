@@ -386,4 +386,5 @@ class ValueMixin(object):
         octodns = ''
         if self._octodns:
             octodns = f', {self._octodns}'
+        return f'<{klass} {self.fqdn} {self.ttl} {self._type}{octodns}>'
         return f'<{klass} {self._type} {self.ttl}, {self.decoded_fqdn}, {self.value}{octodns}>'
