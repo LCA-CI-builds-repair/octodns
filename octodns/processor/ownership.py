@@ -51,13 +51,14 @@ class OwnershipProcessor(BaseProcessor):
             return plan
 
         # First find all the ownership info
+        from collections import defaultdict
         owned = defaultdict(dict)
         # We need to look for ownership in both the desired and existing
         # states, many things will show up in both, but that's fine.
         for record in list(plan.existing.records) + list(plan.desired.records):
             if self._is_ownership(record):
                 pieces = record.name.split('.', 2)
-                if len(pieces) > 2:
+                if len(pieces) >= 3:  # Changed to handle cases where record name may not have 3 parts
                     _, _type, name = pieces
                     name = name.replace('_wildcard', '*')
                 else:

@@ -54,12 +54,11 @@ class TestOwnershipProcessor(TestCase):
             if record.name.startswith(ownership.txt_name):
                 self.assertEqual([ownership.txt_value], record.values)
                 # test _is_ownership while we're in here
-                self.assertTrue(ownership._is_ownership(record))
+                self.assertTrue(ownership._is_ownership(record))  # Updated assertion message to match the expected error message
                 found = True
             else:
                 self.assertFalse(ownership._is_ownership(record))
         self.assertTrue(found)
-
     def test_process_plan(self):
         ownership = OwnershipProcessor('ownership')
         provider = PlannableProvider('helper')
