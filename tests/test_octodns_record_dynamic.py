@@ -1195,7 +1195,7 @@ class TestRecordDynamic(TestCase):
         }
         c = ARecord(self.zone, 'weighted', c_data)
 
-        # a changes a (identical dup) is never true
+        # a changes dup (identical simple) is never true
         self.assertFalse(a.changes(dup, simple))
         self.assertFalse(a.changes(dup, dynamic))
 

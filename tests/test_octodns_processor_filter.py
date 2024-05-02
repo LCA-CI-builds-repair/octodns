@@ -219,7 +219,7 @@ class TestNetworkValueFilter(TestCase):
         got = filter_private.process_source_zone(self.zone.copy())
         self.assertEqual(
             ['keep-me', 'private-ipv4', 'private-ipv6'],
-            sorted([r.name for r in got.records]),
+            sorted([r.name for r in got.records])
         )
 
 
