@@ -224,17 +224,19 @@ class TestNetworkValueFilter(TestCase):
 
 
 class TestIgnoreRootNsFilter(TestCase):
-    zone = Zone('unit.tests.', [])
-    root = Record.new(
-        zone, '', {'type': 'NS', 'ttl': 42, 'value': 'ns1.unit.tests.'}
-    )
-    zone.add_record(root)
-    not_root = Record.new(
-        zone, 'sub', {'type': 'NS', 'ttl': 43, 'value': 'ns2.unit.tests.'}
-    )
-    zone.add_record(not_root)
-    not_ns = Record.new(zone, '', {'type': 'A', 'ttl': 42, 'value': '3.4.5.6'})
-    zone.add_record(not_ns)
+    def setUp(self):
+        self.zone = Zone('unit.tests.', [])
+        self.root = Record.new(
+            self.zone, '', {'type': 'NS', 'ttl': 42, 'value': 'ns1.unit.tests.'}
+        )
+        self.zone.add_record(self.root)
+        self.not_root = Record.new(
+            self.zone, 'sub', {'type': 'NS', 'ttl': 43, 'value': 'ns2.unit.tests.'}
+        )
+        self.zone.add_record(self.not_root)
+        self.not_ns = Record.new(self.zone, '', {'type': 'A', 'ttl': 42, 'value': '3.4.5.6'})
+        self.zone.add_record(self.not_ns)
+
 
     def test_filtering(self):
         proc = IgnoreRootNsFilter('no-root')
