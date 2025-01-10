@@ -201,7 +201,7 @@ class TestNetworkValueFilter(TestCase):
             )
 
     def test_reject(self):
-        filter_private = NetworkValueRejectlistFilter(
+        NetworkValueRejectlistFilter(
             'rejectlist', set(('10.0.0.0/8', 'fd00::/8'))
         )
 
@@ -212,7 +212,7 @@ class TestNetworkValueFilter(TestCase):
         )
 
     def test_allow(self):
-        filter_private = NetworkValueAllowlistFilter(
+        NetworkValueAllowlistFilter(
             'allowlist', set(('10.0.0.0/8', 'fd00::/8'))
         )
 
