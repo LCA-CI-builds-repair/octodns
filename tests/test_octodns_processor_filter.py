@@ -204,7 +204,6 @@ class TestNetworkValueFilter(TestCase):
         filter_private = NetworkValueRejectlistFilter(
             'rejectlist', set(('10.0.0.0/8', 'fd00::/8'))
         )
-
         got = filter_private.process_source_zone(self.zone.copy())
         self.assertEqual(
             ['keep-me', 'public-ipv4', 'public-ipv6'],
@@ -215,7 +214,6 @@ class TestNetworkValueFilter(TestCase):
         filter_private = NetworkValueAllowlistFilter(
             'allowlist', set(('10.0.0.0/8', 'fd00::/8'))
         )
-
         got = filter_private.process_source_zone(self.zone.copy())
         self.assertEqual(
             ['keep-me', 'private-ipv4', 'private-ipv6'],
