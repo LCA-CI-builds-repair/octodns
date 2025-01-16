@@ -38,16 +38,27 @@ def get_config_filename(which):
 
 class TestManager(TestCase):
     def test_missing_provider_class(self):
+    with self.assertRaises(ManagerException) as ctx:
+        Manager(get_config_filename('missing-provider-class.yaml')).sync()
+    self.assertTrue('missing class' in str(ctx.exception))
         with self.assertRaises(ManagerException) as ctx:
             Manager(get_config_filename('missing-provider-class.yaml')).sync()
         self.assertTrue('missing class' in str(ctx.exception))
 
     def test_bad_provider_class(self):
+    with self.assertRaises(ManagerException) as ctx:
+        Manager(get_config_filename('bad-provider-class.yaml')).sync()
+    self.assertTrue('Unknown provider class' in str(ctx.exception))
         with self.assertRaises(ManagerException) as ctx:
             Manager(get_config_filename('bad-provider-class.yaml')).sync()
         self.assertTrue('Unknown provider class' in str(ctx.exception))
 
     def test_bad_provider_class_module(self):
+    with self.assertRaises(ManagerException) as ctx:
+        Manager(
+            get_config_filename('bad-provider-class-module.yaml')
+        ).sync()
+    self.assertTrue('Unknown provider class' in str(ctx.exception))
         with self.assertRaises(ManagerException) as ctx:
             Manager(
                 get_config_filename('bad-provider-class-module.yaml')
@@ -55,6 +66,11 @@ class TestManager(TestCase):
         self.assertTrue('Unknown provider class' in str(ctx.exception))
 
     def test_bad_provider_class_no_module(self):
+    with self.assertRaises(ManagerException) as ctx:
+        Manager(
+            get_config_filename('bad-provider-class-no-module.yaml')
+        ).sync()
+    self.assertTrue('Unknown provider class' in str(ctx.exception))
         with self.assertRaises(ManagerException) as ctx:
             Manager(
                 get_config_filename('bad-provider-class-no-module.yaml')
@@ -62,17 +78,28 @@ class TestManager(TestCase):
         self.assertTrue('Unknown provider class' in str(ctx.exception))
 
     def test_missing_provider_config(self):
+    with self.assertRaises(ManagerException) as ctx:
+        Manager(get_config_filename('missing-provider-config.yaml')).sync()
+    self.assertTrue('provider config' in str(ctx.exception))
         # Missing provider config
         with self.assertRaises(ManagerException) as ctx:
             Manager(get_config_filename('missing-provider-config.yaml')).sync()
         self.assertTrue('provider config' in str(ctx.exception))
 
     def test_missing_env_config(self):
+    with self.assertRaises(ManagerException) as ctx:
+        Manager(get_config_filename('missing-provider-env.yaml')).sync()
+    self.assertTrue('missing env var' in str(ctx.exception))
         with self.assertRaises(ManagerException) as ctx:
             Manager(get_config_filename('missing-provider-env.yaml')).sync()
         self.assertTrue('missing env var' in str(ctx.exception))
 
     def test_missing_source(self):
+    with self.assertRaises(ManagerException) as ctx:
+        Manager(get_config_filename('provider-problems.yaml')).sync(
+            ['missing.sources.']
+        )
+    self.assertTrue('missing sources' in str(ctx.exception))
         with self.assertRaises(ManagerException) as ctx:
             Manager(get_config_filename('provider-problems.yaml')).sync(
                 ['missing.sources.']
@@ -80,6 +107,11 @@ class TestManager(TestCase):
         self.assertTrue('missing sources' in str(ctx.exception))
 
     def test_missing_zone(self):
+    with self.assertRaises(ManagerException) as ctx:
+        Manager(get_config_filename('dynamic-config.yaml')).sync(
+            ['missing.zones.']
+        )
+    self.assertTrue('Requested zone:' in str(ctx.exception))
         with self.assertRaises(ManagerException) as ctx:
             Manager(get_config_filename('dynamic-config.yaml')).sync(
                 ['missing.zones.']
@@ -87,6 +119,11 @@ class TestManager(TestCase):
         self.assertTrue('Requested zone:' in str(ctx.exception))
 
     def test_missing_targets(self):
+    with self.assertRaises(ManagerException) as ctx:
+        Manager(get_config_filename('provider-problems.yaml')).sync(
+            ['missing.targets.']
+        )
+    self.assertTrue('missing targets' in str(ctx.exception))
         with self.assertRaises(ManagerException) as ctx:
             Manager(get_config_filename('provider-problems.yaml')).sync(
                 ['missing.targets.']
@@ -94,6 +131,11 @@ class TestManager(TestCase):
         self.assertTrue('missing targets' in str(ctx.exception))
 
     def test_unknown_source(self):
+    with self.assertRaises(ManagerException) as ctx:
+        Manager(get_config_filename('provider-problems.yaml')).sync(
+            ['unknown.source.']
+        )
+    self.assertTrue('unknown source' in str(ctx.exception))
         with self.assertRaises(ManagerException) as ctx:
             Manager(get_config_filename('provider-problems.yaml')).sync(
                 ['unknown.source.']
@@ -101,6 +143,11 @@ class TestManager(TestCase):
         self.assertTrue('unknown source' in str(ctx.exception))
 
     def test_unknown_target(self):
+    with self.assertRaises(ManagerException) as ctx:
+        Manager(get_config_filename('provider-problems.yaml')).sync(
+            ['unknown.target.']
+        )
+    self.assertTrue('unknown target' in str(ctx.exception))
         with self.assertRaises(ManagerException) as ctx:
             Manager(get_config_filename('provider-problems.yaml')).sync(
                 ['unknown.target.']
@@ -108,6 +155,12 @@ class TestManager(TestCase):
         self.assertTrue('unknown target' in str(ctx.exception))
 
     def test_bad_plan_output_class(self):
+    with self.assertRaises(ManagerException) as ctx:
+        name = 'bad-plan-output-missing-class.yaml'
+        Manager(get_config_filename(name)).sync()
+    self.assertTrue(
+        'plan_output bad is missing class' in str(ctx.exception)
+    )
         with self.assertRaises(ManagerException) as ctx:
             name = 'bad-plan-output-missing-class.yaml'
             Manager(get_config_filename(name)).sync()
@@ -116,6 +169,11 @@ class TestManager(TestCase):
         )
 
     def test_bad_plan_output_config(self):
+    with self.assertRaises(ManagerException) as ctx:
+        Manager(get_config_filename('bad-plan-output-config.yaml')).sync()
+    self.assertTrue(
+        'Incorrect plan_output config for bad' in str(ctx.exception)
+    )
         with self.assertRaises(ManagerException) as ctx:
             Manager(get_config_filename('bad-plan-output-config.yaml')).sync()
         self.assertTrue(
