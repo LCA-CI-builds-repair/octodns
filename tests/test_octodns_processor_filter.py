@@ -33,6 +33,7 @@ for record in [
     ),
 ]:
     zone.add_record(record)
+MAX_ATTEMPTS = 3
 
 
 class TestTypeAllowListFilter(TestCase):
