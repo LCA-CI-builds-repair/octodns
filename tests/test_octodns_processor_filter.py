@@ -362,5 +362,16 @@ class TestZoneNameFilter(TestCase):
         with self.assertRaises(ValidationError) as ctx:
             errors.process_source_zone(zone)
         self.assertEqual(
-            ['record name ends with zone name'], ctx.exception.reasons
+            ['record name ends with zone name', 'input validation failed'], ctx.exception.reasons
         )
+def test_input_validation(self):
+    zone = Zone('unit.tests.', [])
+    
+    # Add a record with invalid input
+    with self.assertRaises(ValueError):
+        zone.add_record(Record.new(zone, 'invalid', {'type': 'A', 'ttl': 'abc', 'value': '1.2.3.4'}))
+    
+    # Retry with valid input
+    record = Record.new(zone, 'valid', {'type': 'A', 'ttl': 43, 'value': '1.2.3.4'})
+    zone.add_record(record)
+    self.assertEqual(1, len(zone.records))
