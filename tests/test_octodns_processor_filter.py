@@ -212,11 +212,11 @@ class TestNetworkValueFilter(TestCase):
         )
 
     def test_allow(self):
-        filter_private = NetworkValueAllowlistFilter(
+        filter_public = NetworkValueAllowlistFilter(
             'allowlist', set(('10.0.0.0/8', 'fd00::/8'))
         )
 
-        got = filter_private.process_source_zone(self.zone.copy())
+        got = filter_public.process_source_zone(self.zone.copy())
         self.assertEqual(
             ['keep-me', 'private-ipv4', 'private-ipv6'],
             sorted([r.name for r in got.records]),
