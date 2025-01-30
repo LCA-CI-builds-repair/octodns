@@ -195,9 +195,9 @@ class TestNetworkValueFilter(TestCase):
         zone.add_record(record)
 
     def test_bad_config(self):
-        with self.assertRaises(ValueError):
-            filter_private = NetworkValueRejectlistFilter(
-                'rejectlist', set(('string', '42.42.42.42/43'))
+        with self.assertRaises(ValidationError):
+            NetworkValueRejectlistFilter(
+                'rejectlist', set(('string', '42.42.42.42/43')),
             )
 
     def test_reject(self):
@@ -221,7 +221,6 @@ class TestNetworkValueFilter(TestCase):
             ['keep-me', 'private-ipv4', 'private-ipv6'],
             sorted([r.name for r in got.records]),
         )
-
 
 class TestIgnoreRootNsFilter(TestCase):
     zone = Zone('unit.tests.', [])
