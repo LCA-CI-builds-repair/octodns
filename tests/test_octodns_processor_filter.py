@@ -227,7 +227,6 @@ class TestIgnoreRootNsFilter(TestCase):
     zone = Zone('unit.tests.', [])
     root = Record.new(
         zone, '', {'type': 'NS', 'ttl': 42, 'value': 'ns1.unit.tests.'}
-    )
     zone.add_record(root)
     not_root = Record.new(
         zone, 'sub', {'type': 'NS', 'ttl': 43, 'value': 'ns2.unit.tests.'}
